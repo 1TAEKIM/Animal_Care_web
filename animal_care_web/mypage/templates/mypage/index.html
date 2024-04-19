@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="branding">
+                <img src="logo.png" alt="로고" class="logo">
+                <span class="brand-name">멍닥터</span>
+            </div>
+            <div class="top-bar">
+                <nav class="top-menu">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">진단하기</a></li>
+                        <li><a href="#">진단 질병 안내</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">커뮤니티</a></li>
+                        <li><a href="#">마이페이지</a></li>
+                        <li><a href="#">로그인</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="user-profile">
+            <div class="user-info">
+                <img src="profile-picture.png" alt="User Profile" class="profile-pic">
+                <h1>user name</h1>
+                <p>Email: user@example.com</p>
+                <p>phone: 010-1234-5678</p>
+                <!-- 유저 정보 수정 버튼 -->
+                <button id="edit-user-info">내 정보 수정하기</button>
+            </div>
+        </section>
+        <section class="pet-profile">
+            <h2>내 반려동물</h2>
+            <div class="pet-info">
+                <!-- 반려동물 정보 카드 -->
+                <div class="pet-card">
+                    <img src="pet-icon.png" alt="Pet Profile">
+                    <p>dog name</p>
+                    <!-- 반려동물 정보 입력/수정 버튼 -->
+                    <button id="edit-pet-info">반려동물 정보 입력하기</button>
+                </div>
+                <!-- 추가 카드 -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 반려동물 정보 입력/수정 버튼 이벤트 처리
+        const editPetButton = document.getElementById('edit-pet-info');
+        
+        editPetButton.addEventListener('click', function() {
+            const buttonText = editPetButton.textContent;
+            
+            if (buttonText === '반려동물 정보 입력하기') {
+                alert('반려동물 정보를 입력합니다.');
+                editPetButton.textContent = '정보 수정하기';
+            } else if (buttonText === '정보 수정하기') {
+                alert('반려동물 정보를 수정합니다.');
+                editPetButton.textContent = '반려동물 정보 입력하기';
+            }
+        });
+
+        // 유저 정보 수정 버튼 이벤트 처리
+        const editUserButton = document.getElementById('edit-user-info');
+        
+        editUserButton.addEventListener('click', function() {
+            alert('내 정보를 수정합니다.');
+            // 유저 정보 수정 로직을 추가할 수 있습니다.
+        });
+    </script>
+</body>
+</html>

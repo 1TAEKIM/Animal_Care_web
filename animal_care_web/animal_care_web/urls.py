@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from mypage import views
+
+app_name = 'animal_care_web'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('mypage/', views.mypage, name='mypage'),
 ]
+
