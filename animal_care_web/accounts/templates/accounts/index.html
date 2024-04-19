@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>회원정보 페이지</h1>
+<hr>
+<h2>{{ user.username }}</h2>
+<hr>
+</form><br>
+<form action="{% url "accounts:logout" %}" mehtod="POST">
+    {% csrf_token %}
+    <input type="submit" value="로그아웃하기">
+</form><br>
+{% endblock content %}
