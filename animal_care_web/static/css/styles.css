@@ -1,0 +1,68 @@
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #e0e0e0; /* 전반적인 배경색 */
+}
+
+.top-bar {
+    background-color:  #eee; /* 상단 바 색상 */
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.top-menu li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.top-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+}
+
+.user-profile, .pet-profile {
+    background-color: #fff; /* 프로필 섹션 배경색 */
+    padding: 20px;
+    text-align: center;
+}
+
+.user-info .profile-pic {
+    border-radius: 50%;
+    width: 150px; /* 프로필 사진 크기 조절 */
+    margin: 0 auto;
+}
+
+.pet-info {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pet-card {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    width: 200px; /* 반려동물 카드의 크기 */
+}
+
+.pet-card img {
+    width: 100px; /* 반려동물 아이콘 크기 */
+    height: auto;
+}
+
+/* 추가적인 스타일링 필요 */
+
+
