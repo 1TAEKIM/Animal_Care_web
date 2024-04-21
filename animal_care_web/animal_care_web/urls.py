@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('community', include('community.urls')),
     path('mypage/', views.mypage, name='mypage'),
+    path('products/', include('products.urls')),
 ]
 
