@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>post</h1>
+    <h1>{{ post.title }} </h1>
+    <p>{{ post.content }}</p>
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="" height="600">
+        <br>
+    {% endif %}
+
+    <form action=delete/>
+     <input type="submit" value="삭제">
+    </form>
+    <form action=postupdate/>
+     <input type="submit" value="수정">
+    </form>
+
+
+    <a href="/community/board/">목록</a>
+{% endblock %}

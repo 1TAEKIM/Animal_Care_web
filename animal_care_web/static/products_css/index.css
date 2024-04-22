@@ -1,0 +1,74 @@
+.ShoppingHeader {
+  text-align: center;
+}
+
+.ShoppingTopArea {
+  text-align: center;
+}
+
+.ShopLayout_animalLabel {
+  text-align: center;
+}
+
+.ShoppingHeader_situlation {
+  text-align: center;
+}
+
+.SituationCategoryHeader {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+}
+
+.SituationCategoryHeaderItem {
+  margin: 0 10px; /* 간격 조절 */
+}
+
+.SituationCategoryHeaderBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #f5f5f5; /* 블록 배경색 */
+  padding: 10px;
+}
+
+.SituationCategoryHeader img {
+  max-width: 100px; /* 이미지 최대 너비 */
+  height: auto; /* 이미지 높이 자동 조정 */
+}
+
+.SituationCategoryHeaderText {
+  margin-top: 10px; /* 텍스트와 이미지 사이 간격 */
+  font-weight: bold; /* 텍스트 굵게 */
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: center; /* 수평 가운데 정렬 */
+}
+
+
+
+
+.product-list {
+  width: 70%; /* 전체 페이지의 70%를 차지합니다. */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* 각 열 사이의 간격을 최대한으로 늘립니다. */
+  float: right;
+}
+
+.product-item {
+  width: 250px; /* product-item 블록의 너비를 고정합니다. */
+  margin-bottom: 20px;
+  margin-right: 20px; /* 오른쪽 여백을 조절합니다. */
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* 패딩과 테두리가 너비를 더하지 않도록 설정합니다. */
+}
+
+.product-item img {
+  max-width: 100%;
+  height: auto;
+}
