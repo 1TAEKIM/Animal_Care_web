@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<title>{{ product.name }} Detail</title>
+
+    <h1>{{ product.name }} Detail</h1>
+    <p><strong>Summary:</strong> {{ product.summary }}</p>
+    <p><strong>Content:</strong> {{ product.content }}</p>
+    <p><strong>Price:</strong> {{ product.price }}원</p>
+
+    {% if product.img_url %}
+    <p><img src="{{ product.img_url }}" alt="{{ product.name }}" width="300" height="300"></p>
+
+    {% elif product.img_dir %}
+    <p><img src="{% static product.img_dir %}" alt="{{ product.name }}" width="300" height="300"></p>
+
+
+    {% endif %}
+
+    <p><strong>Categories:</strong></p>
+    <ul>
+        {% for category in product.detail_category.all %}
+        <li>{{ category.category }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}

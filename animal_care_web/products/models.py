@@ -15,7 +15,7 @@ class Products(models.Model):
     price = models.IntegerField()
     
     # 어떻게 할지 아직 몰라서
-    img_url = models.URLField(null=True)
+    img_url = models.TextField(null=True)
     img_dir = models.ImageField(upload_to='product_images/', null=True)
     
     # user_grade = models.ForeignKey(Users, on_delete=models.CASCADE)
