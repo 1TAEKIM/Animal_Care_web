@@ -5,6 +5,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
+
 # Create your views here.
 def index(request):
     return render(request, "accounts/index.html")
@@ -48,6 +49,7 @@ def delete(request):
     return redirect('accounts:login')
 
 
+# accounts/views.py
 def update(request):
     if request.method == "POST":
         form = CustomUserChangeForm(request.POST, instance=request.user)
@@ -55,7 +57,7 @@ def update(request):
             form.save()
             return redirect('accounts:index')
     else:
-        form = CustomUserChangeForm(instance=request.user)
+        form = CustomUserChangeForm(instance=request.user, user_id=request.user.id)
     context = {
         'form': form
     }
