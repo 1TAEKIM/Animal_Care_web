@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path
 from mypage import views
 from django.urls import path, include
+from django.conf.urls.static import static
+from animal_care_web import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +28,8 @@ urlpatterns = [
     path('community', include('community.urls')),
     path('mypage/', include('mypage.urls')),
     path('products/', include('products.urls')),
+
 ]
 
+# image URL
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
