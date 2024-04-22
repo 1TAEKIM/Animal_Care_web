@@ -1,4 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.contrib.auth.forms import AuthenticationForm
+
+
 
 # Create your views here.
 def index(request):
@@ -24,21 +28,35 @@ def add_dog(request):
         form = DogForm()  # GET 요청시 빈 폼을 생성
     return render(request, 'mypage/add_dog_info.html', {'form': form})
 
-# views.py
-
-from django.shortcuts import render
-from .forms import DogForm  # 폼이 정의된 곳으로부터 DogForm을 임포트
+from django.shortcuts import redirect
 
 def dog_info_submit(request):
     if request.method == 'POST':
         form = DogForm(request.POST)
         if form.is_valid():
-            form.save()
-            # 성공적으로 저장 후 리다이렉션
-            return redirect('some_success_url')
+            dog = form.save(commit=False)
+            dog.owner = request.user  # 현재 로그인한 사용자를 owner로 설정
+            dog.save()
+            # 사용자의 마이페이지로 리디렉션
+            return redirect('mypage:mypage_view', username=request.user.username)
+        else:
+            # 폼 유효성 검사에 실패했을 경우 처리
+            return render(request, 'mypage/dog_form.html', {'form': form})
     else:
         form = DogForm()
+        return render(request, 'mypage/dog_form.html', {'form': form})
 
-    # DogForm 인스턴스를 컨텍스트에 추가
-    return render(request, 'mypage/add_dog_info.html', {'form': form})
 
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from accounts.models import CustomUser
+
+@login_required
+def mypage_view(request, username):  # username 매개변수 추가
+    user = get_object_or_404(CustomUser, username=username)  # get_object_or_404를 사용하여 사용자를 가져옴
+    return render(request, 'mypage/index.html', {'user': user})
+
+from .models import Dog
+def dog_info(reuest):
+    dog = get_object_or_404(CustomUser, username=username)  # get_object_or_404를 사용하여 사용자를 가져옴
+    return render(request, 'mypage/index.html', {'dog': dog})
