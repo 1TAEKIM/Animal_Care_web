@@ -123,11 +123,12 @@
 <div class="product-list">
     {% for product in products %}
     <div class="product-item">
-        <p><strong>Name:</strong> {{ product.name }}</p>
+        <p><strong>Name:</strong> <a href="{% url 'products:product_detail' product.pk %}">{{ product.name }}</p>
         <p><strong>Summary:</strong> {{ product.summary }}</p>
         <p><strong>Price:</strong> {{ product.price }}</p>
         {% if product.img_url %}
         <p><img src="{{ product.img_url }}" alt="{{ product.name }}"></p>
+        </a>
         {% endif %}
     </div>
     {% endfor %}

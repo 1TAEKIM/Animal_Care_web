@@ -1,0 +1,21 @@
+<!-- products/product_detail.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ product.name }}</h1>
+<p><strong>Summary:</strong> {{ product.summary }}</p>
+<p><strong>Price:</strong> {{ product.price }}</p>
+{% if product.img_url %}
+<p><img src="{{ product.img_url }}" alt="{{ product.name }}"></p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <label for="quantity">수량:</label>
+    <input type="number" id="quantity" name="quantity" value="1" min="1">
+    <button type="submit">구매</button>
+</form>
+
+{% endblock content %}
