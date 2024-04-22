@@ -3,11 +3,31 @@
 {% block content %}
 <h1>회원정보 페이지</h1>
 <hr>
-<h2>{{ user.username }}</h2>
-<hr>
-</form><br>
-<form action="{% url "accounts:logout" %}" mehtod="POST">
-    {% csrf_token %}
-    <input type="submit" value="로그아웃하기">
-</form><br>
+{% if user.is_authenticated %}
+    <h2>"{{ user.username }}"님 환영합니다! </h2>
+    <form action="{% url "accounts:update" %}" method="GET">
+        {% csrf_token %}
+        <input type="submit" value="회원정보 수정하기">
+    </form><br>
+    <form action="{% url "accounts:logout" %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="로그아웃하기">
+    </form><br>
+    <form action="{% url "accounts:delete" %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="회원탈퇴하기">
+    {% comment %} </form><br>
+    <form action="{% url "accounts:signup" %}">
+        {% csrf_token %}
+        <input type="submit" value="회원가입">
+    </form> {% endcomment %}
+    <br><br>
+    <h3> ** 반려견에 대한 정보는 마이페이지에서 작성 부탁드려요! **</h3>
+{% else %}
+    <h2>로그인 후 이용해주세요.</h2>
+    <form action="{% url "accounts:login" %}">
+        {% csrf_token %}
+        <input type="submit" value="로그인">
+    </form>
+{% endif %}
 {% endblock content %}
