@@ -18,6 +18,13 @@ def store(request):
     
     return render(request, 'products/store.html')
 
+
+def product_detail(request, pk):
+    product = Products.objects.get(pk=pk)
+    context = {
+        'product' : product
+    }
+    return render(request, 'products/product_detail.html', context)
     
 def detail(request, pk):
     
