@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from mypage import views
 
-app_name = 'animal_care_web'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mypage/', views.mypage, name='mypage'),
     path('accounts/', include('accounts.urls')),
+    path('community', include('community.urls')),
+    path('mypage/', views.mypage, name='mypage'),
+    path('products/', include('products.urls')),
 ]
 
