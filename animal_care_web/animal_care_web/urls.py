@@ -17,11 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from mypage import views
-
-app_name = 'animal_care_web'
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mypage/', views.mypage, name='mypage'),
+    path('mypage/', include('mypage.urls')),
 ]
 
