@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Posts</h1>
+    <table>
+    <thead>
+        <tr>
+            <th>번호</th>
+            <th class="title">제목</th>
+{#            <th>작성자</th>#}
+            <th>작성일</th>
+            <th>조회</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for post in posts %}
+        <tr>
+        <td>{{ post.post_id }}</td>
+        <td>{{ post.title }}</td>
+{#        <td>{{ post.user_id }}</td>#}
+        <td>{{ post.created_at }}</td>
+        <td>{{ post.hits }}</td>
+        </tr>
+
+    {% endfor %}
+    </tbody>
+    </table>
+
+{% endblock %}
