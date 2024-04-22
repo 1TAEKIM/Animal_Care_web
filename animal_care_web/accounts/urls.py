@@ -14,22 +14,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
-from mypage import views
-from django.urls import path, include
-from django.conf.urls.static import static
-from animal_care_web import settings
+from . import views
 
+app_name = 'accounts'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('accounts.urls')),
-    path('community', include('community.urls')),
-    path('mypage/', include('mypage.urls')),
-    path('products/', include('products.urls')),
-
+    path('index/', views.index, name='index'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('signup/', views.signup, name='signup'),
+    path('update/', views.update, name="update"),
+    path('delete/', views.delete, name='delete'),
 ]
-
-# image URL
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

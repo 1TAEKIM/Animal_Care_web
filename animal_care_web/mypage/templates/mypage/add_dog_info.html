@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+    <h1>강아지 정보 입력</h1>
+    
+    <!-- action 속성을 dog_info_submit URL로 설정 -->
+    <form action="{% url 'mypage:dog_info_submit' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">정보 제출하기</button>
+    </form>
+    
+</main>
+{% endblock %}
+
