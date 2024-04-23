@@ -7,9 +7,12 @@ def index(request):
     # products = Products.objects.all()  # 모든 상품을 쿼리합니다.
     products = Products.objects.exclude(name='광고')
     ad = Products.objects.filter(name = '광고')
+    user = request.user
     context = {
         'products': products,
-        'ads' : ad
+        'ads' : ad,
+        'user' : user
+        
     }   # 쿼리한 상품을 컨텍스트에 담습니다.
     return render(request, 'products/index.html', context)
 
@@ -57,8 +60,10 @@ def management(request):
         file_url = default_storage.url(filename)
         img_url = file_url
         print(filename , file_url)
+        user_grade = request.POST.get('user_grade')
+        print(user_grade)
         # img_url = request.POST.get('img_url')
-        img_dir = request.FILES.get('img_dir')
+        # img_dir = request.FILES.get('img_dir')
         category_ids = request.POST.getlist('categories')
         
         product = Products.objects.create(
@@ -67,7 +72,8 @@ def management(request):
             content=content,
             price=price,
             img_url=img_url,
-            img_dir=img_dir
+            # img_dir=img_dir
+            user_id = user_grade
         )
         product.detail_category.add(*category_ids)
         

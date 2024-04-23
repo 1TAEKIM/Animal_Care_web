@@ -10,7 +10,6 @@
     <h1>상품 목록</h1>
     <a href=""></a>
 
-
     <h1>상품 추가</h1>
     <form action={% url "products:management" %} method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -30,7 +29,7 @@
         <input type="file" id="img_url" name="image"><br>
         <button type="submit">Upload</button>
 
-
+        <input type="hidden" id="user_grade" name="user_grade" value="{{ request.user.user_grade }}">
         {% comment %} <label for="img_dir">Image File:</label>
         <input type="file" id="img_dir" name="img_dir"><br> {% endcomment %}
         

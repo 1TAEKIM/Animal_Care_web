@@ -48,9 +48,10 @@
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'products_css/index.css' %}">
-
+<p>{{user.user_grade}}</p>
+{% if user.user_grade == 1 %}
 <a href="{% url "products:management" %}">[상품 관리]</a>
-
+{% endif %}
 <nav class="ShoppingHeader">
     <ul>
         <li class="ShoppingHeaderCategory">
