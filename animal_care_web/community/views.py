@@ -21,11 +21,13 @@ def board(request):
 def posting(request, pk):
     post = Post.objects.get(pk=pk)
     comments = post.comments.all()
+    # children = comment.children.all()
     comment_form = CommentForm(request.POST)
     context = {
         'post': post,
         'comments': comments,
         'comment_form': comment_form,
+        # 'children': children,
     }
     return render(request, 'community/post.html', context)
 
@@ -80,6 +82,7 @@ def delete(request, pk):
         return redirect('community:posting', pk)
     post.delete()
     return redirect('community:board')
+
 
 def create_comment(request, pk):
     post = Post.objects.get(pk=pk)
