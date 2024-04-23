@@ -18,18 +18,17 @@
             <span class="logo-text">멍닥터</span>
         </div>
         <ul>
-            <li><a href="/base">Home</a></li>
+            <li><a href="{% url 'main' %}">Home</a></li>
             <li><a href="#diagnosis">진단하기</a></li>
             <li><a href="#disease-guide">진단 질병 안내</a></li>
-            <li><a href="/products/index">쇼핑</a></li>
-            <li><a href="#community">커뮤니티</a></li>
+            <li><a href="{% url 'products:index' %}">쇼핑</a></li>
+            <li><a href="{% url 'community:index' %}">커뮤니티</a></li>
             {% if user.is_authenticated %}
-            <li><a href="#mypage">마이페이지</a></li>
-            <li><a href="/accounts/logout">로그아웃</a></li>
+            <li><a href="{% url 'mypage:index' %}">마이페이지</a></li>
+            <li><a href="{% url 'accounts:logout' %}">로그아웃</a></li>
             {% else %}
-            <li><a href="/accounts/login">로그인</a></li>
+            <li><a href="{% url 'accounts:index' %}">로그인</a></li>
             {% endif %}
-
         </ul>
     </div>
 </nav>
