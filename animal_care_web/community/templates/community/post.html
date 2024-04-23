@@ -18,9 +18,36 @@
         </form>
     {% endif %}
 
+    <ul>
+    {% for comment in comments %}
+        <li>{{ comment.user }}<br>
+            {{ comment.content }}<br>
+            {{ comment.created_at }}
+<!--            나중에 답글기능구현-->
+            <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="답글">
+            </form>
+            {% if comment.user.id == request.user.id %}
+            <form action=delete/>
+             <input type="submit" value="삭제">
+            </form>
+            <form action=postupdate/>
+             <input type="submit" value="수정">
+            </form>
+            {% endif %}
+
+    <hr>
+        </li>
+    {% endfor %}
+    </ul>
 
 
-
+<form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="submit" value="등록">
+</form>
 
     <a href="/community/board/">목록</a>
 {% endblock %}
