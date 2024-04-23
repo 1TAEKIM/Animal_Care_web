@@ -1,3 +1,5 @@
+
+
 body, html {
     margin: 0;
     padding: 0;
@@ -62,3 +64,16 @@ body, html {
 }
 
 /* 추가적인 스타일링 필요 */
+/*community board style*/
+.post-table {
+    width: 100vw; /* Set table width to match viewport width */
+    background-color: #f2f2f2; /* Set background color */
+    text-align: center; /* Align text center */
+    border-collapse: collapse; /* Collapse borders */
+}
+
+.post-table th,
+.post-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}

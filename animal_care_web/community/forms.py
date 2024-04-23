@@ -1,14 +1,30 @@
 from django import forms
-from .models import Post
+from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content', 'image']
+        labels = {
+            'title': '제목',
+            'content': '내용',
+            'image': '사진 첨부'
+        }
         widgets = {
-            'movie_title': forms.TextInput(attrs={'placeholder': '리뷰할 영화 제목'}),
-            'review_title': forms.TextInput(attrs={'placeholder': '리뷰 제목'}),
-            'content': forms.Textarea(attrs={'placeholder': '리뷰 내용'})
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'cols': 30, 'rows': 10})
 
+        }
+        
+        
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content', ]
+        labels = {
+            'content': '댓글',
+        }
+        widgets = {
+            'content': forms.Textarea(attrs={'class': 'form-control', 'cols': 30, 'rows': 3}),
         }

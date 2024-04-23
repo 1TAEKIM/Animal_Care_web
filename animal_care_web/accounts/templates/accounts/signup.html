@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+<br>
+<h1 class="fw-bolder">회원 가입</h1>
+<hr>
     <form action="{% url "accounts:signup" %}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="회원가입하기">
-    </form>
+    </form><hr>
 {% endblock content %}
