@@ -27,6 +27,7 @@ urlpatterns = [
     path('community/', include('community.urls')),
     path('mypage/', include('mypage.urls')),
     path('products/', include('products.urls')),
+    path('diagnosis/', include('diagnosis.urls'))
 
 ]
 
