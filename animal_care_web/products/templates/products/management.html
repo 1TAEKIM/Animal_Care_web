@@ -8,7 +8,17 @@
 <body>
 
     <h1>상품 목록</h1>
-    <a href=""></a>
+    {% for product in products %}
+    {{product.name}}
+    <a href="{% url 'products:update' pk=product.pk %}" >[상품 수정하기] ||||| </a>
+    <a href="{% url 'products:delete' pk=product.pk %}" class="product_delete_btn">[상품 삭제하기]</a><br>
+    {% endfor %}
+
+
+
+
+
+
 
     <h1>상품 추가</h1>
     <form action={% url "products:management" %} method="post" enctype="multipart/form-data">
@@ -41,5 +51,10 @@
         </select><br>
         <input type="submit" value="Add Product">
     </form>
+
+    <a href="{% url 'products:index' %}" >[상품 목록 보러가기]</a><br>
+    <hr/>
+    
+
 </body>
 </html>
