@@ -17,7 +17,7 @@ class CustomUserChangeForm(UserChangeForm):
 
         super().__init__(*args, **kwargs)
 
-        self.fields['password'].help_text = "<a href='/accounts/change_password/{}'>비밀번호 변경</a>".format(self.user_id)
+        self.fields['password'].help_text = "<a href='/accounts/change_password/{}'>비밀번호 변경하기</a>".format(self.user_id)
     class Meta(UserChangeForm.Meta):
         model = get_user_model()
         fields = ['username']
