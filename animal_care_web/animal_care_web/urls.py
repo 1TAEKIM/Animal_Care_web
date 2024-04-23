@@ -23,6 +23,7 @@ from animal_care_web import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main, name='main'),
+    path('disease_information/', views.disease_information, name='disease_information'),
     path('accounts/', include('accounts.urls')),
     path('community/', include('community.urls')),
     path('mypage/', include('mypage.urls')),

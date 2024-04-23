@@ -18,18 +18,18 @@
     <div class="navbar">
         <div class="logo">
             <img src='{% static "img/logo.png" %}'  alt="Pet Health Diagnostic System Logo">
-            <span class="logo-text"><a href="{% url 'main' %}"><h1 class="fw-semibold">멍닥터</h1></span>
+            <span class="logo-text"><a href="{% url 'main' %}"><h1 class="fw-bold">멍닥터</h1></span>
         </div>
         <ul>
-            <h2><li><a href="#diagnosis">진단하기</a></li></h2>
-            <h2><li><a href="#disease-guide">진단 질병 안내</a></li></h2>
-            <h2><li><a href="{% url 'products:index' %}">쇼핑</a></li></h2>
-            <h2><li><a href="{% url 'community:board' %}">커뮤니티</a></li></h2>
+            <a href="#diagnosis"><h3 class="fw-bolder"><li>진단하기</h3></a></li>
+            <a href="{% url 'disease_information' %}"><h3 class="fw-bolder"><li>진단 질병 안내</h3></a></li>
+            <a href="{% url 'products:index' %}"><h3 class="fw-bolder"><li>쇼핑</h3></a></li>
+            <a href="{% url 'community:board' %}"><h3 class="fw-bolder"><li>커뮤니티</h3></a>
             {% if user.is_authenticated %}
-            <h2><li><a href="{% url 'mypage:mypage_view' username=user.username %}">마이페이지</a></li></h2>
-            <h2><li><a href="{% url 'accounts:logout' %}">로그아웃</a></li></h2>
+            <a href="{% url 'mypage:mypage_view' username=user.username %}"><h3 class="fw-bolder"><li>마이페이지</h3></a>
+            <a href="{% url 'accounts:logout' %}"><h3 class="fw-bolder"><li>로그아웃</h3></a>
             {% else %}
-            <h2><li><a href="{% url 'accounts:index' %}">로그인</a></li></h2>
+            <a href="{% url 'accounts:index' %}"><h3 class="fw-bolder"><li>로그인</h3></a>
             {% endif %}
         </ul>
     </div>
@@ -63,7 +63,7 @@
                 <li>김원태: 메인 페이지, 상품 페이지, S3</li>
                 <li>박지현: 커뮤니티</li>
                 <li>백선영: 마이페이지</li>
-                <li>이강은: 인증화면, 메인 페이지</li>
+                <li>이강은: 회원 인증, 메인 페이지, 진단 질병 안내</li>
                 <li>홍성이: 상품 페이지, S3</li>
             </ul></p>
         </div>

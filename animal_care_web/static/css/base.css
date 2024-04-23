@@ -55,7 +55,17 @@ body {
   height: auto;
 }
 
+.side-bar {
+  position: fixed;
+  top: 60px;
+  height: calc(100% - 50px);
+  width: 200px;
+  padding: 20px;
+}
+
 .content {
+  position: relative;
+  left: 200px;
   background-color: #fff;
   padding: 20px;
   text-align: center;
@@ -86,7 +96,6 @@ body {
   max-width: 100%;
   height: auto;
 }
-
 
 footer {
   background-color: #8a6d3b;
