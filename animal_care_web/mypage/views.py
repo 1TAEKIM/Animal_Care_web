@@ -75,6 +75,14 @@ def dog_edit(request, pk):
     
     return render(request, 'mypage/dog_edit.html', {'form': form, 'dog': dog})
 
+@login_required
+def dog_delete(request, pk):
+    dog = get_object_or_404(Dog, pk=pk)
+    if request.method == 'POST':
+        dog.delete()
+        return redirect('mypage:mypage_view', username=request.user.username)
+    return render(request, 'mypage/dog_delete_confirm.html', {'dog': dog})
+
 
 
 # @login_required
