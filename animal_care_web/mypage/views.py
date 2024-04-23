@@ -1,20 +1,22 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm
-
-
-
-# Create your views here.
-def index(request):
-    return render(request, 'mypage/index.html')
-
-
-
 from django.shortcuts import render, redirect
 from .forms import DogForm 
 from .models import Dog  
+from django.shortcuts import redirect
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from accounts.models import CustomUser
+
+
+# # Create your views here.
+# def index(request):
+#     return render(request, 'mypage/index.html')
+
 
 # 강아지 정보 입력 폼 페이지를 보여주는 뷰
+@login_required
 def add_dog(request):
     if request.method == 'POST':
         form = DogForm(request.POST)
@@ -28,8 +30,7 @@ def add_dog(request):
         form = DogForm()  # GET 요청시 빈 폼을 생성
     return render(request, 'mypage/add_dog_info.html', {'form': form})
 
-from django.shortcuts import redirect
-
+@login_required
 def dog_info_submit(request):
     if request.method == 'POST':
         form = DogForm(request.POST)
@@ -47,16 +48,26 @@ def dog_info_submit(request):
         return render(request, 'mypage/dog_form.html', {'form': form})
 
 
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from accounts.models import CustomUser
-
 @login_required
 def mypage_view(request, username):  # username 매개변수 추가
+    # 마이페이지에 접근하는 사람이 본인의 계정이 아닌 경우에 메인페이지로 이동
+    if request.user.username != username:
+        return render(request, 'accounts/login.html')
     user = get_object_or_404(CustomUser, username=username)  # get_object_or_404를 사용하여 사용자를 가져옴
-    return render(request, 'mypage/index.html', {'user': user})
+    # 강아지 객체를 못찾으면 404 페이지로 리다이렉트 시키는 코드 
+    # 내 프로필 페이지에 왔는데, 이 친구가 강아지를 안키운다? 그러면 404가 열리는거에요
+    # 강아지가 없어도 프로필은 열려야하기 때문에 아래 코드는 사용할 수 없음 
+    # dogs = get_object_or_404(Dog, owner=request.user)
+    dogs = Dog.objects.filter(owner_id=request.user.id)
+    return render(request, 'mypage/index.html', {'user': user, 'dogs': dogs})
 
-from .models import Dog
-def dog_info(reuest):
-    dog = get_object_or_404(CustomUser, username=username)  # get_object_or_404를 사용하여 사용자를 가져옴
-    return render(request, 'mypage/index.html', {'dog': dog})
+
+# @login_required
+# def dog_info(request):
+#     # 현재 로그인한 사용자의 강아지 정보를 조회
+#     dog = Dog.objects.filter(owner_id=user_id).first()
+
+#     return render(request, 'mypage/index.html', {'dog': dog})
+
+
+
