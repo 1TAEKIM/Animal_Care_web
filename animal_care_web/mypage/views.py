@@ -61,6 +61,43 @@ def mypage_view(request, username):  # username 매개변수 추가
     dogs = Dog.objects.filter(owner_id=request.user.id)
     return render(request, 'mypage/index.html', {'user': user, 'dogs': dogs})
 
+@login_required
+def dog_edit(request, pk):
+    dog = get_object_or_404(Dog, pk=pk)
+    
+    if request.method == 'POST':
+        form = DogForm(request.POST, instance=dog)
+        if form.is_valid():
+            form.save()
+            return redirect('mypage:mypage_view', username=request.user.username)
+    else:
+        form = DogForm(instance=dog)
+    
+    return render(request, 'mypage/dog_edit.html', {'form': form, 'dog': dog})
+
+@login_required
+def dog_delete(request, pk):
+    dog = get_object_or_404(Dog, pk=pk)
+    if request.method == 'POST':
+        dog.delete()
+        return redirect('mypage:mypage_view', username=request.user.username)
+    return render(request, 'mypage/dog_delete_confirm.html', {'dog': dog})
+
+
+
+# @login_required
+# def add_dog(request):
+#     if request.method == 'POST':
+#         form = DogForm(request.POST)
+#         if form.is_valid():
+#             dog = form.save(commit=False)
+#             dog.owner = request.user
+#             dog.save()
+#             return redirect('mypage:mypage_view', username=request.user.username)
+#     else:
+#         form = DogForm()
+#     return render(request, 'mypage/add_dog.html', {'form': form})    
+
 
 # @login_required
 # def dog_info(request):

@@ -1,76 +1,68 @@
 {% extends 'base.html' %}
-
+{% load static %}  
 {% block content %}
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>마이페이지</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <main>
-        <section class="user-profile">
-            <div class="user-info">
-                <img src="{% static 'img/profile-picture.png' %}" alt="User Profile" class="profile-pic">
-                <h1>{{ user.username }}</h1>
-                <p>Email: {{ user.email }}</p>
-                <!-- 전화번호 필드가 설정되어 있지 않으면 표시하지 않습니다. -->
-                {% if user.phone_number %}
-                    <p>Phone: {{ user.phone_number }}</p>
-                {% endif %}
-                <!-- 유저 정보 수정 버튼 -->
-                <button id="edit-user-info">내 정보 수정하기</button>
-            </div>
-        </section>
-        <section class="pet-profile">
-            <h2>내 반려동물</h2>
-            <!-- 반려동물 정보 카드 -->
-            <div class="pet-card">
-                <img src="{% static 'img/pet-icon.png' %}" alt="Pet Profile">
-                {% if dogs %}
-                {% for dog in dogs %}
-                    <p>이름: {{ dog.name }}</p>
-                    <p>종: {{ dog.breed }}</p>
-                    <p>나이: {{ dog.age }}</p>
-                    <!-- 반려동물 정보 입력/수정 버튼 -->
-                    <button id="edit-pet-info">반려동물 정보 수정하기</button>
-                {% endfor %}
-                {% else %}
-                    <p>등록된 반려동물 정보가 없습니다.</p>
-                    <button id="edit-pet-info">반려동물 정보 입력하기</button>
-                {% endif %}
-            </div>
-        </section>
-    </main>
+<main>
+    <section class="user-profile">
+        <div class="user-info">
+            <img src="{% static 'img/profile-picture.png' %}" alt="User Profile" class="profile-pic">
+            <h1>{{ user.username }}</h1>
+            <p>Email: {{ user.email }}</p>
+            {% if user.phone_number %}
+                <p>Phone: {{ user.phone_number }}</p>
+            {% endif %}
+            <button id="edit-user-info">내 정보 수정하기</button>
+        </div>
+    </section>
+    <section class="pet-profile">
+        <h2>내 반려동물</h2>
+        <div class="pet-card">
+            <button id="plus-pet-info">반려동물 정보 추가하기</button>
+            <br>
+            <img src="{% static 'img/pet-icon.png' %}" alt="Pet Profile">
+            {% if dogs %}
+            <!--반려동물이 있다면-->
+            {% for dog in dogs %}
+                <p>이름: {{ dog.name }}</p>
+                <p>종: {{ dog.breed }}</p>
+                <p>나이: {{ dog.age }}</p>
+                {% comment %} <p>id: {{ dog.id }}</p> {% endcomment %}
+                <button class="edit-pet-info" data-dog-id="{{ dog.id }}">반려동물 정보 수정하기</button>
+            {% endfor %}
+            <!--반려동물이 없다면 => 동물정보를 입력하자 -->
+            {% else %}
+                <p>등록된 반려동물 정보가 없습니다.</p>
+            {% endif %}
+        </div>
+    </section>
+</main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 유저 정보 수정 버튼 이벤트 처리
-            const editUserButton = document.getElementById('edit-user-info');
-            editUserButton.addEventListener('click', function() {
-                alert('내 정보를 수정합니다.');
-                // 유저 정보 수정 로직을 추가할 수 있습니다.
-            });
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 유저 정보 수정 버튼 이벤트 처리
+        const editUserButton = document.getElementById('edit-user-info');
+        editUserButton.addEventListener('click', function() {
+            alert('내 정보를 수정합니다.');
+            // 유저 정보 수정 로직을 추가할 수 있습니다.
+        });
 
-            // 반려동물 정보 입력/수정 버튼 이벤트 처리
-            const editPetButton = document.getElementById('edit-pet-info');
-            editPetButton.addEventListener('click', function() {
-                const buttonText = editPetButton.textContent;
-                if (buttonText === '반려동물 정보 입력하기') {
-                    alert('반려동물 정보를 입력합니다.');
-                    editPetButton.textContent = '정보 수정하기';
-                    window.location.href = '/mypage/add_dog/';  // URL 수정
-                } else if (buttonText === '정보 수정하기') {
-                    alert('반려동물 정보를 수정합니다.');
-                    editPetButton.textContent = '반려동물 정보 입력하기';
-                }
+
+        // 반려동물 정보 입력/수정 버튼 이벤트 처리
+        const editPetButtons = document.querySelectorAll('.edit-pet-info');
+        editPetButtons.forEach(button => {
+        button.addEventListener('click', function() {
+                const dogId = button.getAttribute('data-dog-id');
+                console.log(dogId)
+                window.location.href = `/mypage/dog_edit/${dogId}/`;
             });
         });
-    </script>
-</body>
-</html>
 
-{% endblock %}
+        const plusPetButton = document.getElementById('plus-pet-info');
+        plusPetButton.addEventListener('click', function() {
+            window.location.href = '/mypage/add_dog/';
+        });
+    });
+</script>
+{% endblock content %}
+
+
+
