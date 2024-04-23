@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-
 {% block content %}
-
 <style>
   /* CSS 코드 */
   .product-list {
@@ -11,7 +9,6 @@
       justify-content: space-between; /* 각 열 사이의 간격을 최대한으로 늘립니다. */
       float: right;
   }
-  
   .product-item {
       width: 250px; /* product-item 블록의 너비를 고정합니다. */
       margin-bottom: 20px;
@@ -20,13 +17,10 @@
       border: 1px solid #ccc;
       box-sizing: border-box; /* 패딩과 테두리가 너비를 더하지 않도록 설정합니다. */
   }
-  
   .product-item img {
       max-width: 100%;
       height: auto;
   }
-
-
   /* CSS 코드 */
   .image-container {
       width: 30%; /* 왼쪽 30%를 차지합니다. */
@@ -34,18 +28,12 @@
       padding: 10px;
       box-sizing: border-box;
   }
-
   .image-container img {
       max-width: 100%;
       height: auto;
       display: block;
   }
-
 </style>
-
-
-
-
 {% load static %}
 <link rel="stylesheet" href="{% static 'products_css/index.css' %}">
 <p>{{user.user_grade}}</p>
@@ -64,14 +52,12 @@
         </li>
     </ul>
 </nav>
-
 <div class="ShoppingTopArea">
     <div class="shopSearch_inputContainer">
         <input type="text" class="shopSearch_searchInput" placeholder="쇼핑 검색" enterkeyhint="search" value>
         <img src="" alt=""> <!-- 검색 아이콘 -->
     </div>
 </div>
-
 <div class="ShopLayout_animalLabel">
     <input type="radio" id="강아지" name="petFilter" value="강이지" style="display:none">
     <label for="강아지" class="animalLabel">
@@ -79,18 +65,16 @@
         <div>강아지</div>
     </label>
 </div>
-
 <nav class="ShoppingHeader_situlation">
     <a class="ShoppingHeader_activeMenu">상황별</a>
 </nav>
-
 <div class="SituationCategoryHeader_desktopHeader">
     <ul class="SituationCategoryHeader">
         <li class="SituationCategoryHeaderItem">
             <div class="SituationCategoryHeaderBlock">
                 <a class="SituationCategoryHeaderLink" href="">
                     <img src="{% static "products_img/dog_icon.png" %}" alt="">
-                    <div class="SituationCategoryHeaderText">관절 관리</div>
+                    <div class="SituationCategoryHeaderText">관절 건강</div>
                 </a>
             </div>
         </li>
@@ -120,7 +104,6 @@
         </li>
     </ul>
 </div>
-
 <div class="product-list">
     {% for product in products %}
     <div class="product-item">
@@ -134,13 +117,9 @@
     </div>
     {% endfor %}
 </div>
-
 <div class="image-container">
   {% for ad_item in ads %}
     <img src="{{ ad_item.img_url }}" alt="광고">
   {% endfor %}
 </div>
-
-
-
 {% endblock content %}

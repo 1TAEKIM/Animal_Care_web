@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Products, Categories
 from django.core.files.storage import default_storage
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -15,6 +16,7 @@ def index(request):
         
     }   # 쿼리한 상품을 컨텍스트에 담습니다.
     return render(request, 'products/index.html', context)
+
 
 
 def store(request):
@@ -43,51 +45,8 @@ def detail(request, pk):
     
     return render(request, 'products/detail.html', context)
 
-    
-    
 
-
-# def management(request):
-    
-#     if request.method == 'POST':
-#         name = request.POST.get('name')
-#         summary = request.POST.get('summary')
-#         content = request.POST.get('content')
-#         price = request.POST.get('price')
-        
-#         file = request.FILES['image']
-#         filename = default_storage.save(file.name, file)
-#         file_url = default_storage.url(filename)
-#         img_url = file_url
-#         print(filename , file_url)
-#         user_grade = request.POST.get('user_grade')
-#         print(user_grade)
-#         # img_url = request.POST.get('img_url')
-#         # img_dir = request.FILES.get('img_dir')
-#         category_ids = request.POST.getlist('categories')
-        
-#         product = Products.objects.create(
-#             name=name,
-#             summary=summary,
-#             content=content,
-#             price=price,
-#             img_url=img_url,
-#             # img_dir=img_dir
-#             user_id = user_grade
-#         )
-#         product.detail_category.add(*category_ids)
-        
-#         return redirect('products:detail', pk=product.pk)
-#     else:
-#         categories = Categories.objects.all()
-#         product = Products.objects.filter()
-#         context = {
-#             'categories' : categories,
-#             'product' : product
-#         }
-#         return render(request, 'products/management.html', context)
-
-
+@login_required
 def management(request):
     
     if request.method == 'POST':
@@ -129,7 +88,7 @@ def management(request):
 
 
 
-    
+@login_required
 def update(request, pk):
     
     product = Products.objects.get(pk=pk)
@@ -165,7 +124,7 @@ def update(request, pk):
         return render(request, 'products/edit.html', context)
 
         
-
+@login_required
 def delete(request, pk):
 
     product = Products.objects.get(pk=pk)
