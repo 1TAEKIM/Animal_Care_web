@@ -9,4 +9,7 @@ urlpatterns = [
     path('add_dog/', views.add_dog, name='add_dog'),
     path('submit_dog_info/', views.dog_info_submit, name='dog_info_submit'),
     path('<str:username>/', views.mypage_view, name='mypage_view'),  # username으로 마이페이지 URL 추가
+    #path('edit_dog/<int:dog_id>/', views.edit_dog, name='edit_dog'),
+    path('dog_edit/<int:pk>/', views.dog_edit, name='dog_edit'),
+
 ]
