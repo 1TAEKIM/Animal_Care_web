@@ -95,3 +95,19 @@ def create_comment(request, pk):
         'comment_form': comment_form
     }
     return render(request, 'community/postcreate.html', context)
+
+
+@login_required(login_url='accounts:login')
+def delete_comment(request, post_id, comment_id):
+    print('함수 돌아감')
+    comment = Comment.objects.get(pk=comment_id)
+    print(comment_id)
+    print(comment.user.id)
+    print(request.user.id)
+
+    print(comment.user.id != request.user.id)
+    if comment.user.id != request.user.id:
+        return redirect('community:posting', post_id)
+    print('댓글 삭제')
+    comment.delete()
+    return redirect('community:posting', post_id)

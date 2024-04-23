@@ -29,7 +29,8 @@
                 <input type="submit" value="답글">
             </form>
             {% if comment.user.id == request.user.id %}
-            <form action=delete/>
+            <form action="{% url 'community:delete_comment' post_id=post.pk comment_id=comment.pk %}" method="POST">
+                {% csrf_token %}
              <input type="submit" value="삭제">
             </form>
             <form action=postupdate/>
@@ -50,4 +51,9 @@
 </form>
 
     <a href="/community/board/">목록</a>
+
+
+<script>
+
+</script>
 {% endblock %}
