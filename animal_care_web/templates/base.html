@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>반려동물 건강 진단 시스템</title>
     {% load static %}
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-     <!-- custom CSS -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -23,18 +18,18 @@
     <div class="navbar">
         <div class="logo">
             <img src='{% static "img/logo.png" %}'  alt="Pet Health Diagnostic System Logo">
-            <span class="logo-text"><a href="{% url 'main' %}"><h1 class="fw-semibold">멍닥터</h1></span>
+            <span class="logo-text"><a href="{% url 'main' %}"><h1 class="fw-bold">멍닥터</h1></span>
         </div>
         <ul>
-            <h2><li><a href="#diagnosis">진단하기</a></li></h2>
-            <h2><li><a href="#disease-guide">진단 질병 안내</a></li></h2>
-            <h2><li><a href="{% url 'products:index' %}">쇼핑</a></li></h2>
-            <h2><li><a href="{% url 'community:board' %}">커뮤니티</a></li></h2>
+            <a href="#diagnosis"><h3 class="fw-bolder"><li>진단하기</h3></a></li>
+            <a href="{% url 'disease_information' %}"><h3 class="fw-bolder"><li>진단 질병 안내</h3></a></li>
+            <a href="{% url 'products:index' %}"><h3 class="fw-bolder"><li>쇼핑</h3></a></li>
+            <a href="{% url 'community:board' %}"><h3 class="fw-bolder"><li>커뮤니티</h3></a>
             {% if user.is_authenticated %}
-            <h2><li><a href="{% url 'mypage:mypage_view' username=user.username %}">마이페이지</a></li></h2>
-            <h2><li><a href="{% url 'accounts:logout' %}">로그아웃</a></li></h2>
+            <a href="{% url 'mypage:mypage_view' username=user.username %}"><h3 class="fw-bolder"><li>마이페이지</h3></a>
+            <a href="{% url 'accounts:logout' %}"><h3 class="fw-bolder"><li>로그아웃</h3></a>
             {% else %}
-            <h2><li><a href="{% url 'accounts:index' %}">로그인</a></li></h2>
+            <a href="{% url 'accounts:index' %}"><h3 class="fw-bolder"><li>로그인</h3></a>
             {% endif %}
         </ul>
     </div>
@@ -43,36 +38,36 @@
 {% block content %}
 
 {% endblock content %}
-<!--<footer>-->
-<!--    <div class="footer">-->
-<!--        <div>-->
-<!--            <img src="{% static 'img/강쥐1.jpg' %}" alt="강쥐1"> -->
-<!--            <H5>Our Mission</H5>-->
-<!--            <ul class="text-start">-->
-<!--                <li>반려견의 생애주기별 필요한 정보 알려주는 기능</li>-->
-<!--                <li>반려인이 업로드한 사진 속 gps 정보 이용해 가까운 동물병원 추천하는 기능</li>-->
-<!--                <li>지역별 반려견에게 많이 발생하는 질병 분석</li>-->
-<!--                <li>챗봇 기능 생성</li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <img src="{% static 'img/강쥐2.jpg' %}" alt="강쥐2"> -->
-<!--            <H5>FAQ</H5>-->
-<!--            <p>언제든지 문의주세요!</p>-->
-<!--            <p>010-XXXX-XXXX</p>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <img src="{% static 'img/두부는 단단.jpg' %}" alt="두부">  -->
-<!--            <H5>Team Introduction</H5>-->
-<!--            <p><ul class="text-start">-->
-<!--                <li>김원태: 메인 페이지, 상품 페이지, S3</li>-->
-<!--                <li>박지현: 커뮤니티</li>-->
-<!--                <li>백선영: 마이페이지</li>-->
-<!--                <li>이강은: 인증화면, 메인 페이지</li>-->
-<!--                <li>홍성이: 상품 페이지, S3</li>-->
-<!--            </ul></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</footer>-->
+<footer>
+    <div class="footer">
+        <div>
+            <img src="{% static 'img/강쥐1.jpg' %}" alt="강쥐1"> 
+            <H5>Our Mission</H5>
+            <ul class="text-start">
+                <li>반려견의 생애주기별 필요한 정보 알려주는 기능</li>
+                <li>반려인이 업로드한 사진 속 gps 정보 이용해 가까운 동물병원 추천하는 기능</li>
+                <li>지역별 반려견에게 많이 발생하는 질병 분석</li>
+                <li>챗봇 기능 생성</li>
+            </ul>
+        </div>
+        <div>
+            <img src="{% static 'img/강쥐2.jpg' %}" alt="강쥐2"> 
+            <H5>FAQ</H5>
+            <p>언제든지 문의주세요!</p>
+            <p>010-XXXX-XXXX</p>
+        </div>
+        <div>
+            <img src="{% static 'img/두부는 단단.jpg' %}" alt="두부">  
+            <H5>Team Introduction</H5>
+            <p><ul class="text-start">
+                <li>김원태: 메인 페이지, 상품 페이지, S3</li>
+                <li>박지현: 커뮤니티</li>
+                <li>백선영: 마이페이지</li>
+                <li>이강은: 회원 인증, 메인 페이지, 진단 질병 안내</li>
+                <li>홍성이: 상품 페이지, S3</li>
+            </ul></p>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

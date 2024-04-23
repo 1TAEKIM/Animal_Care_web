@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>회원정보 페이지</h1>
+<br>
+<h1 class="fw-bolder">회원정보 페이지</h1>
 <hr>
 {% if user.is_authenticated %}
-    <h2>"{{ user.username }}"님 환영합니다! </h2>
+    <h2 class="fw-bolder">"{{ user.username }}"님 환영합니다!</h2><br>
     <form action="{% url "accounts:update" %}" method="GET">
         {% csrf_token %}
         <input type="submit" value="회원정보 수정하기">
@@ -22,9 +23,9 @@
         <input type="submit" value="회원가입">
     </form> {% endcomment %}
     <br><hr>
-    <h3> ** 반려견에 대한 정보는 마이페이지에서 작성 부탁드려요! **</h3>
+    <h4 class="fw-medium"> ** 반려견에 대한 정보는 마이페이지에서 작성 부탁드려요! **</h4>
 {% else %}
-    <h2>로그인 후 이용해주세요.</h2>
+    <h3>로그인 후 이용해주세요.</h3>
     <form action="{% url "accounts:login" %}">
         {% csrf_token %}
         <input type="submit" value="로그인">
