@@ -8,6 +8,14 @@ from django.contrib.auth import get_user_model
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
+        fields = ('username', 'password1')
+    
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+
+        self.fields['password1'].help_text = ""
+        
+        del self.fields['password2']
 
 
 # accounts/forms.py
