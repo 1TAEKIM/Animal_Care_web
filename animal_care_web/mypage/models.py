@@ -12,7 +12,7 @@ class Dog(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # 소유자
     name = models.CharField(max_length=100)  # 이름
     breed = models.CharField(max_length=100)  # 종
-    age = models.IntegerField()  # 나이
+    age = models.PositiveIntegerField()  # 나이
     
     # # 필요에 따라 추가 필드를 정의할 수 있습니다.
 
