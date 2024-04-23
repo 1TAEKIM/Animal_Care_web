@@ -14,7 +14,7 @@ class Dog(models.Model):
     breed = models.CharField(max_length=100)  # 종
     age = models.IntegerField()  # 나이
     
-    # 필요에 따라 추가 필드를 정의할 수 있습니다.
+    # # 필요에 따라 추가 필드를 정의할 수 있습니다.
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name

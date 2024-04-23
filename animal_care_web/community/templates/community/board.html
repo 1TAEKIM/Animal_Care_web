@@ -24,5 +24,8 @@
     {% endfor %}
     </tbody>
     </table>
+    <form action="{% url "community:postwrite" %}">
+        <input type="submit" value="글작성">
+    </form>
 
 {% endblock %}

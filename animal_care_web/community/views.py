@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import PostForm
 from .models import Post
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -23,13 +24,16 @@ def posting(request, pk):
     }
     return render(request, 'community/post.html', context)
 
-
+@login_required  # 작동 안함
 def postwrite(request):
+    if not request.user.is_authenticated:
+        return render(request, 'community/login.html')
     # save post
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            post = form.save()  # user_id 붙이려면 commit=False 해야되는지도..
+            print('save')
+            post = form.save(user_id=request.user)  # user_id 붙이려면 commit=False 해야되는지도..
             return redirect('community:posting', pk=post.pk)
     # write post
     form = PostForm()
