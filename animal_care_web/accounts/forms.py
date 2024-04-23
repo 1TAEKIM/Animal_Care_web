@@ -8,6 +8,14 @@ from django.contrib.auth import get_user_model
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
+        fields = ('username', 'password1')
+    
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+
+        self.fields['password1'].help_text = ""
+        
+        del self.fields['password2']
 
 
 # accounts/forms.py
@@ -17,7 +25,7 @@ class CustomUserChangeForm(UserChangeForm):
 
         super().__init__(*args, **kwargs)
 
-        self.fields['password'].help_text = "<a href='/accounts/change_password/{}'>비밀번호 변경</a>".format(self.user_id)
+        self.fields['password'].help_text = "<a href='/accounts/change_password/{}'>비밀번호 변경하기</a>".format(self.user_id)
     class Meta(UserChangeForm.Meta):
         model = get_user_model()
         fields = ['username']
