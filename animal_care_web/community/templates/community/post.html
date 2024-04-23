@@ -2,14 +2,18 @@
 
 {% block content %}
     <h1>post</h1>
-    <h1>{{ post.title }} </h1>
+    <!-- 포스트 제목 출력 -->
+    <h1>{{ post.title }}</h1>
+    <!-- 포스트 내용 출력 -->
     <p>{{ post.content }}</p>
     {% if post.image %}
+        <!-- 이미지가 있을 경우 이미지 출력 -->
         <img src="{{ post.image.url }}" alt="" height="600">
         <br>
     {% endif %}
 
     {% if post.user.id == request.user.id %}
+        <!-- 현재 사용자가 포스트 작성자일 경우 삭제 및 수정 버튼 표시 -->
         <form action=delete/>
          <input type="submit" value="삭제">
         </form>
@@ -19,35 +23,80 @@
     {% endif %}
 
     <ul>
-    {% for comment in comments %}
-        <li>{{ comment.user }}<br>
-            {{ comment.content }}<br>
-            {{ comment.created_at }}
-<!--            나중에 답글기능구현-->
-            <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
-                {% csrf_token %}
-                <input type="submit" value="답글">
-            </form>
-            {% if comment.user.id == request.user.id %}
-            <form action=delete/>
-             <input type="submit" value="삭제">
-            </form>
-            <form action=postupdate/>
-             <input type="submit" value="수정">
-            </form>
-            {% endif %}
+        {% for comment in comments %}
+            <li>
+                <!-- 댓글 작성자, 내용, 작성일 출력 -->
+                {{ comment.user }}<br>
+                {{ comment.content }}<br>
+                {{ comment.created_at }}
 
-    <hr>
-        </li>
-    {% endfor %}
+                <!-- 답글 작성 폼 출력 -->
+                <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="답글">
+                </form>
+
+                <!-- 현재 사용자가 댓글 작성자일 경우 삭제 및 수정 버튼 표시 -->
+                {% if comment.user.id == request.user.id %}
+                    <form action="{% url 'community:delete_comment' post_id=post.pk comment_id=comment.pk %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="삭제">
+                    </form>
+                    <form action=postupdate/>
+                        <input type="submit" value="수정">
+                    </form>
+                    <!-- 답글 작성 폼 출력 -->
+                    <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
+                        {% csrf_token %}
+                        {{ comment_form }}
+                        <input type="submit" value="답글">
+                {% endif %}
+                <hr>
+            </li>
+        {% endfor %}
+        <!-- 대댓글 목록 출력 -->
+        <ul>
+            {% for child in comment.children.all %}
+                <li>
+                    <!-- 대댓글 작성자, 내용, 작성일 출력 -->
+                    {{ child.user }}<br>
+                    {{ child.content }}<br>
+                    {{ child.created_at }}
+
+                    <!-- 답글 작성 폼 출력 -->
+                    <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
+                        {% csrf_token %}
+                        {{ comment_form }}
+                        <input type="submit" value="답글">
+                    </form>
+
+                    <!-- 현재 사용자가 대댓글 작성자일 경우 삭제 및 수정 버튼 표시 -->
+                    {% if child.user.id == request.user.id %}
+                        <form action="{% url 'community:delete_comment' post_id=post.pk comment_id=comment.pk %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="삭제">
+                        </form>
+                        <form action=postupdate/>
+                            <input type="submit" value="수정">
+                        </form>
+                    {% endif %}
+                    <hr>
+                </li>
+            {% endfor %}
+        </ul>
     </ul>
 
+    <!-- 댓글 등록 폼 출력 -->
+    <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
+        {% csrf_token %}
+         {{ comment_form }}
+        <input type="submit" value="등록">
+    </form>
 
-<form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
-    {% csrf_token %}
-    {{ comment_form }}
-    <input type="submit" value="등록">
-</form>
-
+    <!-- 목록으로 돌아가는 링크 출력 -->
     <a href="/community/board/">목록</a>
+
+    <script>
+        // JavaScript 코드 추가
+    </script>
 {% endblock %}

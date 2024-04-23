@@ -21,11 +21,13 @@ def board(request):
 def posting(request, pk):
     post = Post.objects.get(pk=pk)
     comments = post.comments.all()
+    # children = comment.children.all()
     comment_form = CommentForm(request.POST)
     context = {
         'post': post,
         'comments': comments,
         'comment_form': comment_form,
+        # 'children': children,
     }
     return render(request, 'community/post.html', context)
 
@@ -81,6 +83,7 @@ def delete(request, pk):
     post.delete()
     return redirect('community:board')
 
+
 def create_comment(request, pk):
     post = Post.objects.get(pk=pk)
     comment_form = CommentForm(request.POST)
@@ -95,3 +98,19 @@ def create_comment(request, pk):
         'comment_form': comment_form
     }
     return render(request, 'community/postcreate.html', context)
+
+
+@login_required(login_url='accounts:login')
+def delete_comment(request, post_id, comment_id):
+    print('함수 돌아감')
+    comment = Comment.objects.get(pk=comment_id)
+    print(comment_id)
+    print(comment.user.id)
+    print(request.user.id)
+
+    print(comment.user.id != request.user.id)
+    if comment.user.id != request.user.id:
+        return redirect('community:posting', post_id)
+    print('댓글 삭제')
+    comment.delete()
+    return redirect('community:posting', post_id)
