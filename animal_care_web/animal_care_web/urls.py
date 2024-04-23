@@ -25,7 +25,7 @@ from animal_care_web import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('community', include('community.urls')),
+    path('community/', include('community.urls')),
     path('mypage/', include('mypage.urls')),
     path('products/', include('products.urls')),
 
