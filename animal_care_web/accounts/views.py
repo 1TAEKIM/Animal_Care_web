@@ -49,6 +49,8 @@ def delete(request):
     return redirect('accounts:login')
 
 
+
+
 # accounts/views.py
 def update(request):
     if request.method == "POST":
