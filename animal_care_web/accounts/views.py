@@ -16,7 +16,7 @@ def login(request):
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect('accounts:index')
+            return redirect('main')
     else:
         form = AuthenticationForm()
     context = {
@@ -49,13 +49,21 @@ def delete(request):
     return redirect('accounts:login')
 
 
+
+
 # accounts/views.py
+# def update(request):
+#     if request.method == "POST":
+#         form = CustomUserChangeForm(request.POST, instance=request.user)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('mypage:mypage_view')
 def update(request):
     if request.method == "POST":
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('accounts:index')
+            return redirect('mypage:mypage_view', username=request.user.username)
     else:
         form = CustomUserChangeForm(instance=request.user, user_id=request.user.id)
     context = {
@@ -64,13 +72,16 @@ def update(request):
     return render(request, "accounts/update.html", context)
 
 
+
+
+
 def change_password(request, user_id):
     if request.method == "POST":
         form = PasswordChangeForm(request.user,request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            return redirect('accounts:index')
+            return redirect('mypage:mypage_view', username=request.user.username)
     else:
         form = PasswordChangeForm(request.user)
     context = {

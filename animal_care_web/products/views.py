@@ -17,7 +17,7 @@ def index(request):
         
     }   # 쿼리한 상품을 컨텍스트에 담습니다.
     return render(request, 'products/index.html', context)
-
+    
 
 
 def category_view(request, category_name):

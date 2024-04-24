@@ -1,11 +1,52 @@
 
+@font-face {
+    font-family: 'BMJUA';
+    src: url('./BMJUA.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.BMJUA-font {
+    font-family: 'BMJUA', sans-serif;
+}
+
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('./Dovemayo_gothic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.Dovemayo_gothic-font {
+    font-family: 'Dovemayo_gothic', sans-serif;
+}
+
+@font-face {
+    font-family: '강원교육새음';
+    src: url('./강원교육새음.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.강원교육새음-font {
+    font-family: '강원교육새음', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+.NanumGothic-font {
+    font-family: "Nanum Gothic", sans-serif;
+}
 
 body, html {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial', sans-serif !important;
     background-color: #e0e0e0; /* 전반적인 배경색 */
+    min-height: 100vh; /* 페이지의 최소 높이를 화면 높이와 같게 설정 */
 }
+
+.jua-regular {
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+} 
 
 .top-bar {
     background-color:  #eee; /* 상단 바 색상 */
@@ -63,8 +104,6 @@ body, html {
     height: auto;
 }
 
-/* 추가적인 스타일링 필요 */
-/*community board style*/
 .post-table {
     width: 100vw; /* Set table width to match viewport width */
     background-color: #f2f2f2; /* Set background color */
@@ -76,4 +115,134 @@ body, html {
 .post-table td {
     padding: 8px;
     border: 1px solid #ddd;
+}
+
+
+------------------------------------------------------------------------------------------
+.navbar {
+background-color: #f5f5f5;
+padding: 10px 0;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.navbar ul {
+padding: 0;
+list-style: none;
+display: flex;
+margin: 0;
+margin-right: 10px;
+}
+
+.navbar li {
+padding: 0 20px;
+}
+
+.navbar a {
+text-decoration: none;
+color: #333;
+font-size: 18px;
+}
+
+.logo {
+display: flex;
+align-items: center;
+margin-left: 10px;
+}
+
+.logo img {
+height: 50px;
+}
+
+.logo-text {
+margin-left: 10px;
+font-size: 24px;
+font-weight: bold;
+color: #8a6d3b;
+}
+
+.banner img {
+max-width: 100%;
+height: auto;
+}
+
+.side-bar {
+position: fixed;
+top: 60px;
+height: calc(100% - 50px);
+width: 200px;
+padding: 20px;
+}
+
+.content {
+position: relative;
+left: 200px;
+background-color: #fff;
+padding: 20px;
+text-align: center;
+}
+
+.start-button {
+background-color: #8a6d3b;
+color: white;
+border: none;
+padding: 10px 20px;
+margin: 20px 0;
+cursor: pointer;
+}
+
+.disease-info {
+background-color: #efebe9;
+padding: 20px;
+display: flex;
+justify-content: space-around;
+}
+
+.disease-info div {
+width: 25%;
+padding: 5px;
+}
+
+.disease-info img {
+max-width: 100%;
+height: auto;
+}
+
+footer {
+background-color: #8a6d3b;
+color: white;
+text-align: center;
+padding: 10px 0; /* 상하 10px의 패딩 추가 */
+position: absolute; /* 페이지 플로우에 따라 위치 설정 */
+bottom: -100px; /* 초기에는 화면 아래에 숨겨둠 */
+width: 100%; /* 전체 너비를 차지 */
+transition: bottom 0.3s; /* 변화를 부드럽게 만들기 위해 트랜지션 사용 */
+z-index: 999; /* 다른 요소 위에 올라오도록 설정 */
+}
+
+.footer {
+display: flex;
+justify-content: space-around;
+align-items: center;
+flex-wrap: wrap;
+}
+
+.footer div {
+flex: 1;
+max-width: 25%;
+padding: 0 5px; /* 좌우 5px의 패딩 추가 */
+box-sizing: border-box;
+text-align: center;
+}
+
+.footer p {
+margin-bottom: 10px;
+}
+
+.footer img {
+max-width: 100%;
+height: auto;
+display: block;
+margin: 0 auto;
 }

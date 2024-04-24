@@ -2,27 +2,28 @@
 
 {% block content %}
 <br>
+<div class="container">
 <h1 class="fw-bolder">회원정보 페이지</h1>
-<hr>
+<hr class="border border-danger border-2 opacity-50">
 {% if user.is_authenticated %}
     <h2 class="fw-bolder">"{{ user.username }}"님 환영합니다!</h2><br>
     <form action="{% url "accounts:update" %}" method="GET">
         {% csrf_token %}
-        <input type="submit" value="회원정보 수정하기">
+        <button class="btn btn-outline-dark" type="submit">회원정보 수정하기</button>
     </form><br>
     <form action="{% url "accounts:logout" %}" method="POST">
         {% csrf_token %}
-        <input type="submit" value="로그아웃하기">
+        <button class="btn btn-outline-warning" type="submit">로그아웃하기</button>
     </form><br>
     <form action="{% url "accounts:delete" %}" method="POST">
         {% csrf_token %}
-        <input type="submit" value="회원탈퇴하기">
+        <button class="btn btn-outline-danger" type="submit">회원탈퇴하기</button>
     {% comment %} </form><br>
     <form action="{% url "accounts:signup" %}">
         {% csrf_token %}
         <input type="submit" value="회원가입">
     </form> {% endcomment %}
-    <br><hr>
+    <br><hr class="border border-danger border-2 opacity-50">
     <h4 class="fw-medium"> ** 반려견에 대한 정보는 마이페이지에서 작성 부탁드려요! **</h4>
 {% else %}
     <h3>로그인 후 이용해주세요.</h3>
@@ -31,4 +32,5 @@
         <input type="submit" value="로그인">
     </form>
 {% endif %}
+</div>
 {% endblock content %}

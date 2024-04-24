@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'products_css/management.css' %}">
 <h1>상품 수정</h1>
 
 
@@ -31,7 +33,7 @@
         {% endfor %}
     </select><br>
 
-    <input type="submit" value="Add Product">
+    <button type="submit" class="btn">Add Product</button>
 </form>
 
 {% endblock content %}

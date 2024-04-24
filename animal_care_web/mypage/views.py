@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from accounts.models import CustomUser
+from django.core.files.storage import default_storage
 
 
 # # Create your views here.
@@ -19,7 +20,7 @@ from accounts.models import CustomUser
 @login_required
 def add_dog(request):
     if request.method == 'POST':
-        form = DogForm(request.POST)
+        form = DogForm(request.POST, request.FILES)
         if form.is_valid():
             # 폼의 데이터가 유효하면, 모델 인스턴스를 생성하고 저장
             new_dog = form.save(commit=False)
