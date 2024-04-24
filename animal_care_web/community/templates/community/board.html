@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Posts</h1>
+<br>
+<div class="container">
+<h1 class="fw-bolder">게시판</h1>
+<hr class="border border-warning border-2 opacity-50">
     <div style="overflow-x: auto;">
         <table class="post-table" style="width:100vw; background-color: #f2f2f2; text-align: center;">
             <thead>
@@ -25,7 +28,9 @@
             </tbody>
         </table>
     </div>
+    <hr class="border border-warning border-2 opacity-50">
     <form action="{% url 'community:postwrite' %}" method="get">
         <input type="submit" value="글작성">
     </form>
+</div>
 {% endblock %}

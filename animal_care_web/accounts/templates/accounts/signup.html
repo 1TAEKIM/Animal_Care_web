@@ -2,6 +2,7 @@
 
 {% block content %}
 <br>
+<div class="container">
 <h1 class="fw-bolder">회원 가입</h1>
 <hr class="border border-danger border-2 opacity-50">
     <form action="{% url "accounts:signup" %}" method="POST">
@@ -9,4 +10,5 @@
         {{ form.as_p }}
         <button class="btn btn-outline-info" type="submit">회원가입하기</button>
     </form><hr class="border border-danger border-2 opacity-50">
+</div>
 {% endblock content %}

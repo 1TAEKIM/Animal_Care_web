@@ -22,10 +22,18 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         self.user_id = kwargs.pop('user_id', None)
-
         super().__init__(*args, **kwargs)
 
+        # 각 필드의 레이블을 한국어로 변경
+        self.fields['username'].label = "아이디(ID)"
+        self.fields['email'].label = "이메일(Email)"
+        self.fields['first_name'].label = "이름(first_name)"
+        self.fields['last_name'].label = "성(last_name)"
+        self.fields['password'].label = ""
+
+        self.fields['username'].help_text = "변경할 아이디를 입력해주세요!"
         self.fields['password'].help_text = "<a href='/accounts/change_password/{}'>비밀번호 변경하기</a>".format(self.user_id)
+
     class Meta(UserChangeForm.Meta):
         model = get_user_model()
-        fields = ['username']
+        fields = ['username', 'email', 'first_name', 'last_name']
