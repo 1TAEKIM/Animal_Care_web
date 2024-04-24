@@ -3,8 +3,8 @@ from django.conf import settings
 
 
 class Post(models.Model):
-    # post_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)  # 사용자 없어도 글은 남아있음. 맞냐
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='like_posts')
     title = models.CharField(max_length=20)
     content = models.TextField()
     image = models.ImageField(blank=True, null=True)
