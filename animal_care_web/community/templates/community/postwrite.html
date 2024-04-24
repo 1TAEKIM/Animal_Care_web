@@ -6,11 +6,16 @@
 <h1 class="fw-bolder">게시판</h1>
 <hr class="border border-warning border-2 opacity-50">
 {#{% if user.is_authenticated %}#}
-<form action={% url "community:postwrite" %} method="POST">
+<div class="container">
+    <div class="main-content">
+    <form action={% url "community:postwrite" %} method="POST">
     {% csrf_token %}
     {{ form }}
-    <hr class="border border-warning border-2 opacity-50">
-    <input type="submit" value="글쓰기">
+
+        <br>
+    <input type="submit" class="btn btn-warning" value="글쓰기">
+    </div>
 </form>
+
 </div>
 {% endblock %}
