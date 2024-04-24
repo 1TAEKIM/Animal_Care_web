@@ -3,12 +3,18 @@
 {% block content %}
 <br>
 <h1 class="fw-bolder">회원 수정 페이지</h1>
-<hr>
+<hr class="border border-danger border-2 opacity-50">
 
 <h2>{{ user.username }}님! 변경할 아이디를 작성해주세요. </h2>
+<br>
     <form action="{% url "accounts:update" %}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="수정하기">
+        <br>
+        <button class="btn btn-outline-dark" type="submit">수정하기</button>
     </form>
+</form><br>
+<form action="{% url "accounts:delete" %}" method="POST">
+    {% csrf_token %}
+    <button class="btn btn-outline-danger" type="submit">회원탈퇴하기</button>
 {% endblock content %}
