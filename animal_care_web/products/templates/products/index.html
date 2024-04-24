@@ -21,7 +21,7 @@
     <div class="search-container">
         <input type="text" class="search-input" placeholder="검색">
         <button type="submit" class="search-button">
-            <img src="{% static 'products_css/검색.png' %}" alt="Search" />
+            {% comment %} <img src="{% static 'products_css/검색.png' %}" alt="Search" /> {% endcomment %}
         </button>
     </div>
 </div>
@@ -65,7 +65,7 @@
     {% for ad_item in ads %}
     <img src="{{ ad_item.img_url }}" alt="광고">
     {% endfor %}
-</div>
+</div> 
 
 {% endblock content %}
 
