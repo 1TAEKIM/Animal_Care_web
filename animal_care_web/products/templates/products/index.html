@@ -1,128 +1,64 @@
 {% extends "base.html" %}
-{% comment %} {% block content %}  {% endcomment %}
-<style>
-  /* CSS 코드 */
-  .product-list {
-      width: 70%; /* 전체 페이지의 70%를 차지합니다. */
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between; /* 각 열 사이의 간격을 최대한으로 늘립니다. */
-      float: right;
-  }
-  .product-item {
-      width: 250px; /* product-item 블록의 너비를 고정합니다. */
-      margin-bottom: 20px;
-      margin-right: 20px; /* 오른쪽 여백을 조절합니다. */
-      padding: 10px;
-      border: 1px solid #ccc;
-      box-sizing: border-box; /* 패딩과 테두리가 너비를 더하지 않도록 설정합니다. */
-  }
-  .product-item img {
-      max-width: 100%;
-      height: auto;
-  }
-  /* CSS 코드 */
-  .image-container {
-      width: 30%; /* 왼쪽 30%를 차지합니다. */
-      float: left;
-      padding: 10px;
-      box-sizing: border-box;
-  }
-  .image-container img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-  }
-</style>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 {% block content %}
-<style>
-    /* CSS 코드 */
-</style>
+
 {% load static %}
 <link rel="stylesheet" href="{% static 'products_css/index.css' %}">
-<p>{{ user.user_grade }}</p>
+{% comment %} <p>{{ user.user_grade }}</p> {% endcomment %}
 {% if user.user_grade == 1 %}
-<a href="{% url "products:management" %}">[상품 관리]</a>
+<!-- 기존 텍스트 링크 대신 아이콘 링크 사용 -->
+<a href="{% url 'products:management' %}" class="">
+    <button class="btn btn-warning">상품 관리</button>
+</a>
 {% endif %}
-<nav class="ShoppingHeader">
-    <ul>
-        <li class="ShoppingHeaderCategory">
-            <a href="{% url "products:index" %}">제품 탐색</a>
-            <img src="" alt="">
-        </li>
-        <li class="ShoppingHeaderCategory">
-            <a href="{% url "products:store" %}">멍닥터 스토어</a>
-            <img src="" alt="">
-        </li>
-    </ul>
-</nav>
-<div class="ShoppingTopArea">
-    <div class="shopSearch_inputContainer">
-        <input type="text" class="shopSearch_searchInput" placeholder="쇼핑 검색" enterkeyhint="search" value>
-        <img src="" alt=""> <!-- 검색 아이콘 -->
+
+
+<div class="header">
+    <div class="menu">
+        <!-- Insert menu items here -->
+    </div>
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="검색">
+        <button type="submit" class="search-button">
+            <img src="{% static 'products_css/검색.png' %}" alt="Search" />
+        </button>
     </div>
 </div>
-<div class="ShopLayout_animalLabel">
-    <input type="radio" id="강아지" name="petFilter" value="강이지" style="display:none">
-    <label for="강아지" class="animalLabel">
-        <img src="{% static "products_img/dog_icon.png" %}" alt="강아지">
-        <div>강아지</div>
-    </label>
-</div>
-<nav class="ShoppingHeader_situlation">
-    <a class="ShoppingHeader_activeMenu">상황별</a>
-</nav>
-<div class="SituationCategoryHeader_desktopHeader">
-    <ul class="SituationCategoryHeader">
-        <li class="SituationCategoryHeaderItem">
-            <div class="SituationCategoryHeaderBlock">
-                <a class="SituationCategoryHeaderLink" href="{% url 'products:category' '관절건강' %}">
-                    <img src="{% static "products_img/dog_icon.png" %}" alt="">
-                    <div class="SituationCategoryHeaderText">관절 건강</div>
-                </a>
-            </div>
-        </li>
-        
-        <li class="SituationCategoryHeaderItem">
-            <div class="SituationCategoryHeaderBlock">
-                <a class="SituationCategoryHeaderLink" href="{%url 'products:category' '산책' %}">
-                    <img src="{% static "products_img/dog_icon.png" %}" alt="">
-                    <div class="SituationCategoryHeaderText">산책</div>
-                </a>
-            </div>
-        </li>
 
-        <li class="SituationCategoryHeaderItem">
-            <div class="SituationCategoryHeaderBlock">
-                {% comment %} <a class="SituationCategoryHeaderLink" href="{%url 'products:category' '분리불안' %}"> {% endcomment %}
-                    <img src="{% static "products_img/dog_icon.png" %}" alt="">
-                    <div class="SituationCategoryHeaderText">분리불안</div>
-                </a>
-            </div>
-        </li>
+<!-- The rest of your content -->
 
-        <li class="SituationCategoryHeaderItem">
-            <div class="SituationCategoryHeaderBlock">
-                {% comment %} <a class="SituationCategoryHeaderLink" href="{%url 'products:category' '알러지 관리' %}"> {% endcomment %}
-                    <img src="{% static "products_img/dog_icon.png" %}" alt="">
-                    <div class="SituationCategoryHeaderText">알러지 관리</div>
-                </a>
-            </div>
+
+
+<div class="box-container">
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'products:category' '관절건강' %}">관절 건강</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'products:category' '산책' %}">산책</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'products:category' '분리불안' %}">분리불안</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'products:category' '알러지 관리' %}">알러지 관리</a>
         </li>
     </ul>
 </div>
+
+
 <div class="product-list">
     {% for product in products %}
-    <div class="product-item">
-        <p><strong>Name:</strong> <a href="{% url 'products:product_detail' product.pk %}">{{ product.name }}</a></p>
-        <p><strong>Summary:</strong> {{ product.summary }}</p>
-        <p><strong>Price:</strong> {{ product.price }}</p>
-        {% if product.img_url %}
-        <p><img src="{{ product.img_url }}" alt="{{ product.name }}"></p>
-        {% endif %}
-    </div>
+    <div class="card text-center" style="width: 18rem;">
+        <img src="{{ product.img_url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text"> {{ product.summary }}</p>
+          <p class="card-text"> {{ product.price }}</p>
+          <a href="{% url 'products:product_detail' product.pk %}" class="btn btn-primary">상세보기</a>
+        </div>
+      </div>
     {% endfor %}
 </div>
 <div class="image-container">
@@ -130,4 +66,7 @@
     <img src="{{ ad_item.img_url }}" alt="광고">
     {% endfor %}
 </div>
+
 {% endblock content %}
+
+
