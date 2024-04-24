@@ -95,13 +95,11 @@ def delete(request, pk):
 
 def post_like(request, pk):
     post = Post.objects.get(pk=pk)
-    liked = False
     if request.user in post.like_users.all():
         post.like_users.remove(request.user)
     else:
         post.like_users.add(request.user, through_defaults={'memo':'메모'})
-        liked = True
-    return JsonResponse({'liked': liked})
+    return redirect('community:posting', post.pk)
 
 
 def create_comment(request, pk):
@@ -126,6 +124,7 @@ def create_comment(request, pk):
         'comment_form': comment_form
     }
     return render(request, 'community/post.html', context)
+
 
 
 def update_comment(request, pk, comment_id):
