@@ -20,7 +20,7 @@
             <span class="logo-text"><a href="{% url 'main' %}"><h1 class="fw-bold">멍닥터</h1></span>
         </div>
         <ul>
-            <a href="#diagnosis"><h3 class="fw-bolder"><li>진단하기</h3></a></li>
+            <a href={% url "diagnosis:index" %}><h3 class="fw-bolder"><li>진단하기</h3></a></li>
             <a href="{% url 'disease_information' %}"><h3 class="fw-bolder"><li>진단 질병 안내</h3></a></li>
             <a href="{% url 'products:index' %}"><h3 class="fw-bolder"><li>쇼핑</h3></a></li>
             <a href="{% url 'community:board' %}"><h3 class="fw-bolder"><li>커뮤니티</h3></a>
@@ -37,7 +37,7 @@
 {% block content %}
 
 {% endblock content %}
-<footer>
+{% comment %} <footer>
     <div class="footer">
         <div>
             <img src="{% static 'img/home/강쥐1.jpg' %}" class="rounded" alt="강쥐1"> 
@@ -69,6 +69,6 @@
             </ul></p>
         </div>
     </div>
-</footer>
+</footer> {% endcomment %}
 </body>
 </html>

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Products, Categories
 from django.core.files.storage import default_storage
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
 
 
 def index(request):
@@ -16,6 +17,31 @@ def index(request):
         
     }   # 쿼리한 상품을 컨텍스트에 담습니다.
     return render(request, 'products/index.html', context)
+
+
+
+def category_view(request, category_name):
+    category = get_object_or_404(Categories, category=category_name)
+    products = Products.objects.filter(detail_category=category)
+    
+    ad = Products.objects.filter(name = '광고')
+    
+    context = {
+        'products': products,
+        'ads' : ad
+    }
+    return render(request, 'products/category.html', context)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
