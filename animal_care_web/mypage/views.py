@@ -19,7 +19,7 @@ from accounts.models import CustomUser
 @login_required
 def add_dog(request):
     if request.method == 'POST':
-        form = DogForm(request.POST)
+        form = DogForm(request.POST, request.FILES)
         if form.is_valid():
             # 폼의 데이터가 유효하면, 모델 인스턴스를 생성하고 저장
             new_dog = form.save(commit=False)
