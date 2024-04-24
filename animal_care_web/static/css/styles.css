@@ -215,17 +215,18 @@ max-width: 100%;
 height: auto;
 }
 
+
 footer {
-background-color: #8a6d3b;
-color: white;
-text-align: center;
-padding: 10px 0; /* 상하 10px의 패딩 추가 */
-position: absolute; /* 페이지 플로우에 따라 위치 설정 */
-bottom: -100px; /* 초기에는 화면 아래에 숨겨둠 */
-width: 100%; /* 전체 너비를 차지 */
-transition: bottom 0.3s; /* 변화를 부드럽게 만들기 위해 트랜지션 사용 */
-z-index: 999; /* 다른 요소 위에 올라오도록 설정 */
-}
+    background-color: #8a6d3b;
+    color: white;
+    /* text-align: center; */
+    padding: 10px 0; /* 상하 10px의 패딩 추가 */
+    position: fixed; /* 페이지 플로우에 따라 위치 설정 */
+    bottom: 0; /* 초기에는 화면 아래에 숨겨둠 */
+    width: 100%; /* 전체 너비를 차지 */
+    transition: bottom 0.3s; /* 변화를 부드럽게 만들기 위해 트랜지션 사용 */
+    z-index: 999; /* 다른 요소 위에 올라오도록 설정 */
+} 
 
 .footer {
 display: flex;
@@ -239,7 +240,7 @@ flex: 1;
 max-width: 25%;
 padding: 0 5px; /* 좌우 5px의 패딩 추가 */
 box-sizing: border-box;
-text-align: center;
+text-align: centeleftr;
 }
 
 .footer p {
