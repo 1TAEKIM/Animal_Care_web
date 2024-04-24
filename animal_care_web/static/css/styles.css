@@ -29,10 +29,16 @@
     font-family: '강원교육새음', sans-serif;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-.NanumGothic-font {
-    font-family: "Nanum Gothic", sans-serif;
+@font-face {
+    font-family: 'NanumGothic';
+    src: url('./NanumGothic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
+.NanumGothic-font {
+    font-family: "NanumGothic", sans-serif;
+}
+
 
 body, html {
     margin: 0;
