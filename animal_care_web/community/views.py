@@ -3,10 +3,9 @@ from .forms import PostForm, CommentForm
 from .models import Post, Comment
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
 
 
-
-# Create your views here.
 def index(request):
     return render(request, 'community/index.html')
 
@@ -86,12 +85,23 @@ def delete(request, pk):
     return redirect('community:board')
 
 
+# def post_like(request, pk):
+#     post = Post.objects.get(pk=pk)
+#     if request.user in post.like_users.all():
+#         post.like_users.remove(request.user)
+#     post.like_users.add(request.user, through_defaults={'memo':'메모'})
+#     return redirect('community:posting', post.pk)
+
+
 def post_like(request, pk):
     post = Post.objects.get(pk=pk)
+    liked = False
     if request.user in post.like_users.all():
         post.like_users.remove(request.user)
-    post.like_users.add(request.user)
-    return redirect('community:posting', post.pk)
+    else:
+        post.like_users.add(request.user, through_defaults={'memo':'메모'})
+        liked = True
+    return JsonResponse({'liked': liked})
 
 
 def create_comment(request, pk):

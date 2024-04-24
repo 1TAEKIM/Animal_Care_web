@@ -1,25 +1,66 @@
 {% block content %}
-    <h1>post</h1>
-    <!-- 포스트 제목 출력 -->
-    <h1>{{ post.title }}</h1>
-    <hr>
-    <!-- 포스트 내용 출력 -->
-    <p>{{ post.content }}</p>
-    {% if post.image %}
-        <!-- 이미지가 있을 경우 이미지 출력 -->
-        <img src="{{ post.image.url }}" alt="" height="600">
-        <br>
-    {% endif %}
 
-    <!-- 현재 사용자가 포스트 작성자일 경우 삭제 및 수정 버튼 표시 -->
-     {% if post.user.id == request.user.id %}
-        <form action=delete/>
-         <input type="submit" value="삭제">
-        </form>
-        <form action=postupdate/>
-         <input type="submit" value="수정">
-        </form>
-    {% endif %}
+<div>
+    <div>
+        <div class="">
+            <a href="/community/board/">게시판</a>
+        </div>
+        <div>
+            <h1>{{ post.title }}</h1>
+        </div>
+        <div>
+            <span>{{ post.user }}</span>
+            <i class="dot"> ・ </i>
+            <span class="se_publishDate pcol2">{{ post.created_at }}</span>
+        </div>
+        <hr>
+    </div>
+    <div class="main-content">
+        <div>
+            <span>{{ post.content }}</span>
+        </div>
+        <div>
+            {% if post.image %}
+            <!-- 이미지가 있을 경우 이미지 출력 -->
+            <img src="{{ post.image.url }}" alt="" height="600">
+            <br>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+<div class="post-footer">
+    <div class="like-btn-container" style="float: right; margin-right: 10px;">
+        <img id="like-button" src="{% if request.user in post.like_users.all %}/static/img/heart.svg{% else %}/static/img/heart-fill.svg{% endif %}" data-post-id="{{ post.pk }}" />
+    </div>
+    <div class="postedit-btn" style="float: right; margin-right: 10px;"">
+        {% if post.user.id == request.user.id %}
+            <i class="aline"></i>
+            <form action="delete/" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <input type="submit" value="삭제">
+            </form>
+            <form action="postupdate/" method="GET" style="display: inline;">
+                <input type="submit" value="수정">
+            </form>
+        {% endif %}
+    </div>
+</div>
+
+<div class="postComment">
+    <div class="comments">
+
+    </div>
+
+    <div class="comment-box">
+
+    </div>
+
+</div>
+
+
+
 
     <ul>
         <!-- 각 댓글 아래에 답글 작성 폼 포함 -->
@@ -103,6 +144,38 @@
                 $(this).closest('li').find('.edit-form').toggle();
             });
         });
+
+        $(document).ready(function() {
+        $('#like-button').on('click', function() {
+            var postId = $(this).data('post-id');
+            $.ajax({
+                type: 'POST',
+                url: '/community/board/' + postId + '/like/',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function(data) {
+                    // 좋아요 요청이 성공하면 UI를 업데이트합니다.
+                    if (data.liked) {
+                        $('#like-button').attr('src', '/static/img/heart-fill.svg');
+                    } else {
+                        $('#like-button').attr('src', '/static/img/heart.svg');
+                    }
+                }
+            });
+        });
+    });
+
+        // var i = 0;
+        // $('#like-button').on('click', function() {
+        //     if (i == 0) {
+        //         $(this).attr('src', '/static/img/heart-fill.svg');
+        //         i++;
+        //     } else if (i == 1) {
+        //         $(this).attr('src', '/static/img/heart.svg');
+        //         i--;
+        //     }
+        // });
 
     </script>
 {% endblock %}
