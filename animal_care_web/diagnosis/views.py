@@ -6,13 +6,15 @@ from rest_framework.response import Response
 from rest_framework import status
 import os
 import boto3
+import tensorflow as tf
+import numpy as np
+
 
 
 def S3ImageDownloadView(request, image_key):
     try:
         image = diagnosis.objects.get(pk=image_key)
         print(image)
-
         # AWS 클라이언트 생성
         s3_client = boto3.client(
             's3',
@@ -26,14 +28,14 @@ def S3ImageDownloadView(request, image_key):
         print("------")
         print(response)
         image_data = response['Body'].read()
-
         # 이미지를 로컬 파일 시스템에 저장
         image_path = os.path.join(settings.MEDIA_ROOT, image_name)
         print(image_path)
+        
         with open(image_path, 'wb') as f:
             f.write(image_data)
-
         render(request, 'diagnosis/index.html')
+    
     
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -42,13 +44,13 @@ def S3ImageDownloadView(request, image_key):
 
 
 def index(request):
-    if request.method == 'POST':    
+    if request.method == 'POST':
         file = request.FILES['image']
         filename = default_storage.save(file.name, file)
         file_url = default_storage.url(filename)
+        print(filename, file_url)
         diag = diagnosis.objects.create(image_name=filename, img_url=file_url)
         return redirect('diagnosis:img_detail', pk=diag.pk)
-
     return render(request, 'diagnosis/index.html')
 
 
