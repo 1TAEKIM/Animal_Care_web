@@ -1,11 +1,11 @@
 from django.db import models
-from accounts.models import CustomUser
 from django.conf import settings
-# from accounts.models import Users
 
 class Categories(models.Model):
     category = models.CharField(max_length=100)
 
+    def __srt__(self):
+        return self.name
 
 # Create your models here.
 class Products(models.Model):
@@ -16,11 +16,8 @@ class Products(models.Model):
     content = models.TextField()
     price = models.IntegerField()
     
-    # 어떻게 할지 아직 몰라서
     img_url = models.TextField(null=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    
-    # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='products_user_info')
-    # user_grade = models.ForeignKey(Users, on_delete=models.CASCADE)
-    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)    
 
+    def __srt__(self):
+        return self.name

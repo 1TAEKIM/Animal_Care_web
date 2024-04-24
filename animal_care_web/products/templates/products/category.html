@@ -1,5 +1,6 @@
+<!-- category.html -->
 {% extends "base.html" %}
-{% comment %} {% block content %}  {% endcomment %}
+
 <style>
   /* CSS 코드 */
   .product-list {
@@ -35,13 +36,12 @@
   }
 </style>
 
-
 {% block content %}
-<style>
-    /* CSS 코드 */
-</style>
+
 {% load static %}
 <link rel="stylesheet" href="{% static 'products_css/index.css' %}">
+
+
 <p>{{ user.user_grade }}</p>
 {% if user.user_grade == 1 %}
 <a href="{% url "products:management" %}">[상품 관리]</a>
@@ -113,21 +113,28 @@
         </li>
     </ul>
 </div>
+
+
+
 <div class="product-list">
     {% for product in products %}
     <div class="product-item">
-        <p><strong>Name:</strong> <a href="{% url 'products:product_detail' product.pk %}">{{ product.name }}</a></p>
+      <a href="{% url 'products:product_detail' product.pk %}">
+        <p><strong>Name:</strong> {{ product.name }}</p>
         <p><strong>Summary:</strong> {{ product.summary }}</p>
         <p><strong>Price:</strong> {{ product.price }}</p>
         {% if product.img_url %}
         <p><img src="{{ product.img_url }}" alt="{{ product.name }}"></p>
         {% endif %}
+      </a>
     </div>
     {% endfor %}
 </div>
+
 <div class="image-container">
-    {% for ad_item in ads %}
-    <img src="{{ ad_item.img_url }}" alt="광고">
-    {% endfor %}
+  {% for ad_item in ads %}
+  <img src="{{ ad_item.img_url }}" alt="광고">
+  {% endfor %}
 </div>
-{% endblock content %}
+
+{% endblock %}
