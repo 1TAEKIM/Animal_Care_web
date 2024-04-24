@@ -20,6 +20,7 @@ from . import views
 from django.conf.urls.static import static
 from animal_care_web import settings
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main, name='main'),
@@ -28,7 +29,9 @@ urlpatterns = [
     path('community/', include('community.urls')),
     path('mypage/', include('mypage.urls')),
     path('products/', include('products.urls')),
-    path('diagnosis/', include('diagnosis.urls'))
+    path('diagnosis/', include('diagnosis.urls')),
+    
+    
 
 ]
 

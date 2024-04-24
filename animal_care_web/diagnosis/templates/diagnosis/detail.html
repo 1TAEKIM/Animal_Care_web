@@ -4,17 +4,15 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'diagnosis_css/diagnosis.css' %}"> <!-- 스타일시트 경로는 프로젝트에 맞게 수정 -->
 
-<div class="content-wrapper">
-    {% if diagnosis_img.img_url %}
-        <div class="image-container">
-            <img src="{{ diagnosis_img.img_url }}" alt="Diagnosis Image">
-        </div>
-        <div class="button-container">
-            <form action="{% url 'diagnosis:s3_image_download' image_key=diagnosis_img_pk %}" method="get">
-                <button type="submit" class="download-button">로컬에 저장</button>
-            </form>
-        </div>
-    {% endif %}
-</div>
+{% if diagnosis_img.img_url %}
 
-{% endblock content %}
+    <p><img src="{{ diagnosis_img.img_url }}"></p>
+    <form action="{% url 'diagnosis:s3_image_download' image_key=diagnosis_img_pk %}" method="get">
+        <button type="submit">로컬에 저장</button> // 추 후 로컬에 저장된 이미지를 이용해서 AI 모델 결과 반환
+    </form>
+    
+    
+{% endif %}
+
+{% endblock content %} 
+
