@@ -113,46 +113,46 @@ html, body {
 
 .header {
   display: flex;
-  justify-content: space-between; /* Aligns menu and search */
-  align-items: center; /* Vertical alignment */
+  justify-content: space-between; 
+  align-items: center; 
   padding: 10px;
-  /* Add additional styling for background, etc. */
+
 }
 
 .search-container {
-  position: relative; /* For absolute positioning of the search icon inside */
+  position: relative; 
 }
 
 .search-input {
-  width: 100%; /* Full width of its container */
-  padding: 8px 40px 8px 20px; /* Padding inside the input */
-  font-size: 16px; /* Font size of the text */
-  border: 1px solid #ccc; /* Border of the search input */
-  border-radius: 20px; /* Rounded corners of the search input */
+  width: 100%; 
+  padding: 8px 40px 8px 20px; 
+  font-size: 16px; 
+  border: 1px solid #ccc; 
+  border-radius: 20px;
 }
 
 .search-button {
-  position: absolute; /* Absolute position */
-  right: 10px; /* Positioned to the right inside the search container */
-  top: 50%; /* Aligns button to the center vertically */
-  transform: translateY(-50%); /* Ensures precise centering */
+  position: absolute; 
+  right: 10px; 
+  top: 50%; 
+  transform: translateY(-50%); 
   background: none;
   border: none;
   cursor: pointer;
 }
 
 .search-button img {
-  width: 20px; /* Width of the search icon */
-  height: 20px; /* Height of the search icon */
+  width: 20px;
+  height: 20px; 
 }
 
 .nav-link {
-  color: black; /* 기본 색상 설정 */
-  /* 기타 스타일 속성 */
+  color: black; 
+
 }
 
 .nav-link:hover {
-  color: blue; /* 마우스를 올렸을 때 색상 */
-  text-decoration: none; /* 링크 밑줄 없앰 */
+  color: blue; 
+  text-decoration: none; 
 }
 
