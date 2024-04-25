@@ -379,15 +379,24 @@ margin-bottom: 10px;
     padding-bottom: 29px;
 }
 
+th {
+    padding-bottom: 20px;
+    /*color: rgb(102, 102, 102);*/
+    /*color: darkgray !important;*/
+    font-family: "Nanum Gothic", sans-serif;
+    font-size: 16px;
+}
+
 .to-board {
     padding-bottom: 20px;
-    color: rgb(102, 102, 102);
+    color: rgb(102, 102, 102) !important;
     font-family: "Nanum Gothic", sans-serif;
     font-size: 16px;
     text-decoration: none !important; /* 링크에 밑줄 제거 */
 }
 
 .to-board:hover {
+    text-decoration: rgb(102, 102, 102) !important;
     color: blue;
 }
 
