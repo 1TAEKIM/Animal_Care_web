@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+    <meta charset="UTF-8">
+
+{% block content %}
+{#{% if user.is_authenticated %}#}
+<div class="container">
+    <div class="main-content">
+    <form action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+        <br>
+    <input type="submit" class="btn btn-warning" value="수정">
+    </div>
+</form>
+
+</div>
+{% endblock %}

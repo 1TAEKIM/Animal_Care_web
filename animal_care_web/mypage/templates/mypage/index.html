@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .muser-profile {
+        margin-bottom: 10px; /* 하단 마진 추가 */
+    }
+    .muser-info {
+        text-align: center; /* 텍스트 가운데 정렬 */
+    }
+    .muser-info h1 {
+        font-size: 1.5rem; /* 제목 크기 증가 */
+        margin-bottom: 15px;
+    }
+    .muser-info p {
+        margin-bottom: 10px;
+    }
+    .muser-info button {
+        margin-top: 20px;
+    }
+    .mpet-profile {
+        overflow-y: auto; /* 섹션 내 스크롤 가능 */
+        {% comment %} max-height: 300px; /* 섹션 최대 높이 지정 (설정에 따라 조절 가능) */ {% endcomment %}
+    }
+    .mpet-card {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* 중앙 정렬 */
+        gap: 20px;
+    }
+    .mpet-info {
+        flex: 0 0 calc(25% - 20px);
+        background-color: #FFF9C4; /* 회색 계열 배경색 */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px; /* 각 반려동물 정보의 하단 마진 */
+        text-align: center; /* 텍스트 가운데 정렬 추가 */
+    }
+    .mpet-info img {
+        max-width: 100%;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+    .mpet-info h1 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #8B4513; /* 갈색 계열 글자색 */
+    }
+    .mpet-info p {
+        margin-bottom: 5px;
+    }
+    .mpet-info button {
+        background-color: #FFFFFF; ; /* 배경색 으로 변경 */
+        color: #FFD700; /* 노란색 글자색 */
+        border: 2px solid #FFD700; /* 노란색 테두리 */
+        border-radius: 5px;
+        padding: 8px 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease; /* 호버시 색 변경 효과 추가 */
+    }
+    #plus-mpet-info {
+        margin-top: 20px;
+        display: block;
+        margin-bottom: 20px;
+        background-color: #FFD700;
+        color: #000000;
+        border: 2px solid #FFD700;
+        border-radius: 5px;
+        padding: 8px 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    #plus-mpet-info:hover {
+        background-color: #FFA500;
+        color: #FFFFFF;
+    }
+</style>
+<main>
+    <section class="muser-profile">
+        <div class="muser-info">
+            <hr class="border border-danger border-2 opacity-50">
+            <h1>{{ user.username }}님의 회원정보를 수정하시겠습니까?</h1>
+            {% comment %} <p>Email: {{ user.email }}</p>
+            {% if user.phone_number %}
+                <p>Phone: {{ user.phone_number }}</p>
+            {% endif %} {% endcomment %}
+            <!-- 내 정보 수정하기 버튼 -->
+            <button id="edit-user-info" class="btn btn-outline-warning">내 정보 수정하기</button>
+        </div>
+        <hr class="border border-danger border-2 opacity-50">
+    </section>
+    <section class="mpet-profile">
+        <h2 style="text-align: center;">내 반려동물</h2>
+        <!-- 반려동물 정보 추가하기 버튼 -->
+        <button id="plus-pet-info" class="btn btn-outline-warning" style="display: block; margin: 20px auto;">반려동물 정보 추가하기</button>
+        <div class="mpet-card">
+            {% if dogs %}
+            {% for dog in dogs %}
+            <div class="mpet-info">
+                <img src="{% static 'img/pet-icon.png' %}" alt="Pet Profile">
+                <h1>{{ dog.name }}</h1>
+                <p>종: {{ dog.breed }}</p>
+                <p>나이: {{ dog.age }}</p>
+                <!-- 반려동물 정보 수정하기 버튼 -->
+                <button class="edit-pet-info btn btn-outline-warning" data-dog-id="{{ dog.id }}">반려동물 정보 수정하기</button>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>등록된 반려동물 정보가 없습니다.</p>
+            {% endif %}
+        </div>
+    </section>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 유저 정보 수정 버튼 이벤트 처리
+        const editUserButton = document.getElementById('edit-user-info');
+        editUserButton.addEventListener('click', function() {
+            // 버튼을 클릭하면 회원 정보 수정 페이지로 이동
+            window.location.href = '/accounts/update/';
+        });
+        // 반려동물 정보 입력/수정 버튼 이벤트 처리
+        const editPetButtons = document.querySelectorAll('.edit-pet-info');
+        editPetButtons.forEach(button => {
+        button.addEventListener('click', function() {
+                const dogId = button.getAttribute('data-dog-id');
+                console.log(dogId)
+                window.location.href = `/mypage/dog_edit/${dogId}/`;
+            });
+        });
+        const plusPetButton = document.getElementById('plus-pet-info');
+        plusPetButton.addEventListener('click', function() {
+            window.location.href = '/mypage/add_dog/';
+        });
+    });
+</script>
+{% endblock content %}

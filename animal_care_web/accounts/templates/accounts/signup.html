@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<div class="container">
+<h1 class="fw-bolder">회원 가입</h1>
+<hr class="border border-danger border-2 opacity-50">
+    <form action="{% url "accounts:signup" %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <ul>
+            <li>비밀번호는 다른 개인 정보와 너무 비슷해서는 안 됩니다.</li>
+            <li>비밀번호는 최소 8자 이상이어야 합니다.</li>
+            <li>널리 사용되는 비밀번호는 사용할 수 없습니다.</li>
+            <li>비밀번호는 숫자로만 이루어져서는 안 됩니다.</li>
+        </ul>
+        <button class="btn btn-outline-info" type="submit">회원가입하기</button>
+    </form><hr class="border border-danger border-2 opacity-50">
+</div>
+
+<footer>
+    <div class="footer Dovemayo_gothic-font fs-6">
+        <div>
+            {% comment %} <img src="{% static 'img/home/강쥐1.jpg' %}" class="rounded" alt="강쥐1">  {% endcomment %}
+            <H5>Our Mission</H5>
+            <ul class="text-start">
+                <li>반려견의 생애주기별 필요한 정보 알려주는 기능</li>
+                <li>반려인이 업로드한 사진 속 gps 정보 이용해 가까운 동물병원 추천하는 기능</li>
+                <li>지역별 반려견에게 많이 발생하는 질병 분석</li>
+                <li>챗봇 기능 생성</li>
+            </ul>
+        </div>
+        <div>
+            {% comment %} <img src="{% static 'img/home/강쥐2.jpg' %}" class="rounded" alt="강쥐2">  {% endcomment %}
+            <H5>F A Q</H5>
+            <p>언제든지 문의주세요!</p>
+            <p>010-XXXX-XXXX</p>
+            <br><br>
+        </div>
+        <div>
+            {% comment %} <img src="{% static 'img/home/두부는 단단.jpg' %}" class="rounded" alt="두부">   {% endcomment %}
+            <H5>두부는 단단</H5>
+            <H5>Team Introduction</H5>
+            <p><ul class="text-start">
+                <li>김원태: 메인 페이지, 상품 페이지, S3</li>
+                <li>박지현: 커뮤니티</li>
+                <li>백선영: 마이페이지</li>
+                <li>이강은: 회원 인증, 메인 페이지, 진단 질병 안내</li>
+                <li>홍성이: 상품 페이지, S3</li>
+            </ul></p>
+        </div>
+    </div>
+</footer>
+
+{% endblock content %}

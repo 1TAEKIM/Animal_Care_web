@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'products_css/index.css' %}">
+{% comment %} <p>{{ user.user_grade }}</p> {% endcomment %}
+{% if user.user_grade == 1 %}
+<!-- 기존 텍스트 링크 대신 아이콘 링크 사용 -->
+<a href="{% url 'products:management' %}" class="">
+    <button class="btn btn-warning">상품 관리</button>
+</a>
+{% endif %}
+
+
+<div class="ShoppingTopArea">
+    <div class="shopSearch_inputContainer">
+        <input type="text" class="shopSearch_searchInput" placeholder="쇼핑 검색" enterkeyhint="search" value>
+        <img src="" alt=""> <!-- 검색 아이콘 -->
+    </div>
+</div>
+
+
+<div class="box-container">
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'products:category' '관절건강' %}">관절 건강</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'products:category' '산책' %}">산책</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'products:category' '분리불안' %}">분리불안</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'products:category' '알러지 관리' %}">알러지 관리</a>
+        </li>
+    </ul>
+</div>
+
+
+<div class="product-list">
+    {% for product in products %}
+    <div class="card text-center" style="width: 18rem;">
+        <img src="{{ product.img_url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text"> {{ product.summary }}</p>
+          <p class="card-text"> {{ product.price }}</p>
+          <a href="{% url 'products:product_detail' product.pk %}" class="btn btn-primary">상세보기</a>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+<div class="image-container">
+    {% for ad_item in ads %}
+    <img src="{{ ad_item.img_url }}" alt="광고">
+    {% endfor %}
+</div>
+{% endblock content %}
+
+

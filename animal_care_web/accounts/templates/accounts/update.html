@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% comment %} <br>
+<div class="container">
+<h1 class="fw-bolder">회원 수정 페이지</h1>
+<hr class="border border-danger border-2 opacity-50">
+
+<h2>{{ user.username }}님! 변경할 아이디를 작성해주세요. </h2>
+<br>
+    <form action="{% url "accounts:update" %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <button class="btn btn-outline-dark" type="submit">수정하기</button>
+    </form>
+</div> {% endcomment %}
+
+<br>
+<div class="container">
+    <h1 class="NanumGothic-font">회원 수정 페이지</h1>
+    <hr class="border border-danger border-2 opacity-50">
+    <br>
+    <form action="{% url "accounts:update" %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-outline-dark" type="submit" value="수정하기">
+    </form>
+    <br>
+    <form action="{% url "accounts:delete" %}" method="POST">
+        {% csrf_token %}
+        <input class="btn btn-outline-danger" type="submit" value="회원탈퇴하기">
+    </form>
+</div>
+
+{% endblock content %}

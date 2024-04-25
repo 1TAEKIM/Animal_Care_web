@@ -1,0 +1,171 @@
+/* 전역 스타일 */
+html, body {
+    height: 105%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  h1 {
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* 상품 목록 및 상품 추가 테이블 스타일 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #e2e2e2;
+  }
+  
+  /* 폼 스타일링 */
+  form {
+    background: #fff;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative; /* 상대적 위치 설정 */
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  input[type=text],
+  input[type=number],
+  input[type=file],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* border와 padding을 너비에 포함 */
+  }
+  
+  input[type=submit] {
+    background-color: #5c85d6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #4c75c0;
+  }
+  
+  button[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /* float: right; 제거 */
+    display: block; /* 버튼을 블록 요소로 변경 */
+    width: 100%; /* 버튼의 너비를 폼의 너비와 동일하게 설정 */
+    margin-top: 20px; /* 버튼과 위 요소 사이의 여백을 추가 */
+  }
+  
+  button[type=submit]:hover {
+    background-color: #45a049;
+  }
+  
+  /* 버튼 스타일 */
+  a.btn {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 7px 15px;
+    background-color: #f44336;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  
+  a.btn:hover {
+    background-color: #d73833;
+  }
+  
+  .product_delete_btn {
+    background-color: #ff5722;
+  }
+  
+  .product_delete_btn:hover {
+    background-color: #e64a19;
+  }
+  
+  
+  /* Product List Container */
+.product-list {
+    display: flex; /* Enables flexbox */
+    flex-direction: row; /* Align children in a row */
+    flex-wrap: wrap; /* Allows items to wrap onto multiple lines */
+    justify-content: center; /* Centers items on the main axis */
+    gap: 10px; /* Provides space between items */
+    margin: 0 auto; /* Center the container */
+    max-width: 1200px; /* Maximum width of the container */
+    padding: 20px; /* Padding around the content */
+  }
+  
+  /* Product Item Container */
+  .product-item-container {
+    background: #fff; /* Background color for product item */
+    border: 1px solid #ddd; /* Border for each product item */
+    border-radius: 4px; /* Rounded corners for the container */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for each product item */
+    padding: 10px; /* Padding inside each product item */
+    margin-bottom: 20px; /* Space between product rows */
+  }
+  
+  /* Buttons inside the Product Item */
+  .btn {
+    background-color: #f44336; /* Red background for buttons */
+    color: white; /* White text color */
+    text-align: center; /* Center the text inside buttons */
+    padding: 8px 16px; /* Padding inside buttons */
+    margin: 0 4px; /* Margin between buttons */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners for buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-decoration: none; /* No underline on text */
+    font-size: 0.9em; /* Font size */
+  }
+  
+  /* Edit button specific style */
+  .btn.edit {
+    background-color: #f0ad4e; /* Orange background for edit button */
+  }
+  
+  /* Delete button specific style */
+  .btn.delete {
+    background-color: #d9534f; /* Dark red background for delete button */
+  }
+  
