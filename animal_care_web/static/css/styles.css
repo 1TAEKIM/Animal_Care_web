@@ -98,42 +98,6 @@ body {
   height: auto;
 }
 
-footer {
-  background-color: #8a6d3b;
-  color: white;
-  text-align: center;
-  padding: 10px 0; /* 상하 10px의 패딩 추가 */
-  position: absolute; /* 페이지 플로우에 따라 위치 설정 */
-  bottom: -100px; /* 초기에는 화면 아래에 숨겨둠 */
-  width: 100%; /* 전체 너비를 차지 */
-  transition: bottom 0.3s; /* 변화를 부드럽게 만들기 위해 트랜지션 사용 */
-  z-index: 999; /* 다른 요소 위에 올라오도록 설정 */
-}
-.footer {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.footer div {
-  flex: 1;
-  max-width: 25%;
-  padding: 0 5px; /* 좌우 5px의 패딩 추가 */
-  box-sizing: border-box;
-  text-align: center;
-}
-.footer p {
-  margin-bottom: 10px;
-}
-.footer img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-
-
 
 @font-face {
     font-family: 'BMJUA';
@@ -365,30 +329,27 @@ footer {
 } 
 
 .footer {
-display: flex;
-justify-content: space-around;
-align-items: center;
-flex-wrap: wrap;
+    display: flex;
+    max-width: 100%;
+    padding: 0 5px; /* 좌우 5px의 패딩 추가 */
+    box-sizing: border-box;
+    /* text-align: center; */
+    /* justify-content: space-between; */
+    justify-content: center;
 }
 
 .footer div {
-flex: 1;
-max-width: 25%;
-padding: 0 5px; /* 좌우 5px의 패딩 추가 */
-box-sizing: border-box;
-text-align: centeleftr;
+    flex: 1;
+    max-width: 25%;
+    padding: 0 5px; /* 좌우 5px의 패딩 추가 */
+    box-sizing: border-box;
+    text-align: center;
 }
 
 .footer p {
 margin-bottom: 10px;
 }
 
-.footer img {
-max-width: 100%;
-height: auto;
-display: block;
-margin: 0 auto;
-}
 /*포스트 스타일링*/
 @font-face {
     font-family: 'SDSamliphopangche_Outline';
@@ -447,7 +408,6 @@ margin: 0 auto;
 .main-content {
     padding: 30px;
 }
-
 
 .post-footer {
     padding: 10px;
@@ -535,5 +495,3 @@ margin: 0 auto;
     padding-bottom: 10px;
 
 }
-
->>>>>>> 111bcec9d25fe63b3ab57da65a678a52a14913f5
