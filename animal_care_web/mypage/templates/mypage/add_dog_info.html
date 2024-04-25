@@ -1,28 +1,129 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<main>
-    <h1>강아지 정보 입력</h1>
+<style>
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    form {
+        width: 70%;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    label.image-label {
+        margin-top: 20px;
+        cursor: pointer;
+        background-color: #FFFFFF; /* 배경색 하얀색으로 변경 */
+        color: #000000;
+        border: 2px solid #FFD700; /* 테두리 색상 노란색으로 변경 */
+        border-radius: 5px;
+        padding: 8px 15px;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* 테두리 색상 추가 */
+    }
+
+    label.image-label:hover {
+        background-color: #FFD700; /* 마우스를 올렸을 때 배경색 노란색으로 변경 */
+        color: #FFFFFF; /* 텍스트 색상 변경 */
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .pet-image-preview {
+        max-width: 100%;
+        margin-top: 20px;
+        display: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button[type="submit"] {
+        margin-top: 20px;
+        background-color: #FFD700;
+        color: #000000;
+        border: 2px solid #FFD700;
+        border-radius: 5px;
+        padding: 8px 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        font-family: 'Dovemayo_gothic-font', sans-serif; /* 글꼴 추가 */
+    }
+
+    button[type="submit"]:hover {
+        background-color: #FFA500;
+        color: #FFFFFF;
+    }
     
-    <!-- action 속성을 dog_info_submit URL로 설정 -->
+</style>
+
+<main>
+    <h1 class = 'Dovemayo_gothic-font'>강아지 정보 입력</h1>
+{% comment %} 
     <form action="{% url 'mypage:dog_info_submit' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        
+
         <!-- 반려동물 정보 추가하기 버튼 아래에 추가 -->
-        <input type="file" id="pet-image-input" accept="image/*" style="display: none;" name="pet_image">
-        <label for="pet-image-input" id="pet-image-label" class="image-label">반려동물 이미지 선택</label>
-        <img id="pet-image-preview" class="pet-image-preview" src="#" alt="반려동물 이미지 미리보기" style="display: none;">
+        <div>
+            <label for="image" class="image-label">반려동물 이미지 선택</label>
+            <input type="file" id="image" name="image" accept="image/*">
+            <img id="pet-image-preview" class="pet-image-preview" src="#" alt="반려동물 이미지 미리보기">
+        </div>
+
+        <button type="submit">정보 제출하기</button>
+    </form> {% endcomment %}
+
+
+    <form action="{% url 'mypage:add_dog' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+           
+        <div class ='Dovemayo_gothic-font'>
+            <label for="id_name">이름</label>
+            <input type="text" id="id_name" name="name" required>
+        </div>
+        
+        <div class ='Dovemayo_gothic-font'>
+            <label for="id_breed">종</label>
+            <input type="text" id="id_breed" name="breed" required>
+        </div>
+        
+        <div class ='Dovemayo_gothic-font'>
+            <label for="id_age">나이</label>
+            <input type="number" id="id_age" name="age" required>
+        </div>
+        
+        <div>
+            <label for="image" class="image-label">이미지 선택</label>
+            <input type="file" id="image" name="image" accept="image/*">
+
+
+            <img id="pet-image-preview" class="pet-image-preview" src="#" alt="반려동물 이미지 미리보기">
+        </div>
     
         <button type="submit">정보 제출하기</button>
     </form>
+
+
 </main>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // 반려동물 이미지 input 변경 이벤트 처리
         const petImageInput = document.getElementById('pet-image-input');
-        const petImageLabel = document.getElementById('pet-image-label');
+        const petImageLabel = document.querySelector('.image-label');
         const petImagePreview = document.getElementById('pet-image-preview');
 
         petImageInput.addEventListener('change', function() {
@@ -39,24 +140,8 @@
             }
         });
 
-        // 반려동물 이미지 선택 레이블 위치 조정
         const submitButton = document.querySelector('button[type="submit"]');
         submitButton.insertAdjacentElement('beforebegin', petImageLabel);
     });
 </script>
-
-<style>
-    /* 이미지 미리보기 스타일 */
-    .pet-image-preview {
-        max-width: 100%;
-        margin-top: 20px;
-        display: none; /* 초기에는 숨김 */
-    }
-
-    /* 이미지 라벨 위치 조정 */
-    .image-label {
-        display: inline-block;
-        margin-bottom: 10px;
-    }
-</style>
 {% endblock %}

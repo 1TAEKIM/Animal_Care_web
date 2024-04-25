@@ -1,7 +1,62 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<main>
+<style>
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    form {
+        width: 70%;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button[type="submit"] {
+        margin-top: 20px;
+        background-color: #FFD700;
+        color: #000000;
+        border: 2px solid #FFD700;
+        border-radius: 5px;
+        padding: 8px 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #FFA500;
+        color: #FFFFFF;
+    }
+
+    button.delete-btn {
+        margin-top: 20px;
+        background-color: #FFFFFF; /* 배경색 하얀색으로 변경 */
+        color: #FF0000; /* 글자색 붉은색으로 변경 */
+        border: 2px solid #FF0000; /* 테두리 색상 붉은색으로 변경 */
+        border-radius: 5px;
+        padding: 8px 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* 효과 추가 */
+    }
+
+    button.delete-btn:hover {
+        background-color: #FF0000; /* 마우스를 올렸을 때 배경색 붉은색으로 변경 */
+        color: #FFFFFF; /* 텍스트 색상 변경 */
+    }
+</style>
+
+{% comment %} <main>
     <h1>반려동물 정보 수정</h1>
     
     <form action="" method="post">
@@ -12,7 +67,54 @@
 
     <form action="{% url 'mypage:dog_delete' pk=dog.pk %}" method="post" style="margin-top: 20px;">
         {% csrf_token %}
-        <button type="submit" onclick="return confirm('반려동물 정보를 삭제하시겠습니까?');">삭제하기</button>
+        <button type="submit" onclick="return confirm('반려동물 정보를 삭제하시겠습니까?');" class="delete-btn">삭제하기</button>
     </form>
+</main> {% endcomment %}
+
+
+<main>
+    <h1>반려동물 정보 수정</h1>
+    
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {% comment %} <div>
+            <label for="id_owner">소유자</label>
+            <input type="text" id="id_owner" name="owner" value="{{ dog.owner }}" required>
+        </div> {% endcomment %}
+        
+        <div>
+            <label for="id_name">이름</label>
+            <input type="text" id="id_name" name="name" value="{{ dog.name }}" required>
+        </div>
+        
+        <div>
+            <label for="id_breed">종</label>
+            <input type="text" id="id_breed" name="breed" value="{{ dog.breed }}" required>
+        </div>
+        
+        <div>
+            <label for="id_age">나이</label>
+            <input type="number" id="id_age" name="age" value="{{ dog.age }}" required>
+        </div>
+        
+        <div>
+            <label for="id_img_url">이미지 선택</label>
+            <input type="file" id="image" name="image" value="">
+            {% comment %} <button type="submit">upload</button> {% endcomment %}
+        </div>
+
+        <button type="submit">정보 수정하기</button>
+    </form>
+
+    <form action="{% url 'mypage:dog_delete' pk=dog.pk %}" method="post" style="margin-top: 20px;">
+        {% csrf_token %}
+        <button type="submit" onclick="return confirm('반려동물 정보를 삭제하시겠습니까?');" class="delete-btn">삭제하기</button>
+    </form>
+    
 </main>
+
+
+
+
 {% endblock %}
