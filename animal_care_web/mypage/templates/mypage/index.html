@@ -83,7 +83,7 @@
 </style>
 <main>
     <section class="muser-profile">
-        <div class="muser-info">
+        <div class="Dovemayo_gothic-font muser-info">
             <hr class="border border-danger border-2 opacity-50">
             <h1>{{ user.username }}님의 회원정보를 수정하시겠습니까?</h1>
             {% comment %} <p>Email: {{ user.email }}</p>
@@ -95,7 +95,7 @@
         </div>
         <hr class="border border-danger border-2 opacity-50">
     </section>
-    <section class="mpet-profile">
+    <section class="Dovemayo_gothic-font mpet-profile">
         <h2 style="text-align: center;">내 반려동물</h2>
         <!-- 반려동물 정보 추가하기 버튼 -->
         
@@ -106,7 +106,7 @@
         <div class="mpet-card">
             {% if dogs %}
             {% for dog in dogs %}
-            <div class="mpet-info">
+            <div class="Dovemayo_gothic-font mpet-info">
                 <img src="{{ dog.img_url }}" alt="Pet Profile">
                 <h1>{{ dog.name }}</h1>
                 <p>종: {{ dog.breed }}</p>

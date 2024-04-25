@@ -16,58 +16,62 @@ from django.core.files.storage import default_storage
 #     return render(request, 'mypage/index.html')
 
 
-# 강아지 정보 입력 폼 페이지를 보여주는 뷰
+# # 강아지 정보 입력 폼 페이지를 보여주는 뷰
+# @login_required
+# def add_dog(request):
+
+#     if request.method == 'POST':
+#         form = DogForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             # 폼의 데이터가 유효하면, 모델 인스턴스를 생성하고 저장
+#             new_dog = form.save(commit=False)
+#             new_dog.owner = request.user  # 강아지 모델에 소유자 필드가 있다고 가정
+#             new_dog.save()
+#             return redirect('some_view_to_redirect')  # 성공 시 리다이렉트할 뷰 이름
+#     else:
+#           # GET 요청시 빈 폼을 생성
+#         return render(request, 'mypage/add_dog_info.html')
+
+
+
+from django.shortcuts import render, redirect
+from django.core.files.storage import default_storage
+from django.contrib.auth.decorators import login_required
+from .models import Dog
+
 @login_required
 def add_dog(request):
-
-    if request.method == 'POST':
-        form = DogForm(request.POST, request.FILES)
-        if form.is_valid():
-            # 폼의 데이터가 유효하면, 모델 인스턴스를 생성하고 저장
-            new_dog = form.save(commit=False)
-            new_dog.owner = request.user  # 강아지 모델에 소유자 필드가 있다고 가정
-            new_dog.save()
-            return redirect('some_view_to_redirect')  # 성공 시 리다이렉트할 뷰 이름
-    else:
-          # GET 요청시 빈 폼을 생성
-        return render(request, 'mypage/add_dog_info.html')
-
-
-
-@login_required
-def add_dog(request):
-
-
     dog = None  # GET 요청일 때 dog 변수를 초기화
 
     if request.method == 'POST':
-        
         name = request.POST.get('name')
         breed = request.POST.get('breed')
         age = request.POST.get('age')
+        img_url = None  # 이미지 URL 초기화
 
-        file = request.FILES['image']
-        filename = default_storage.save(file.name, file)
-        file_url = default_storage.url(filename)
-        print(filename, file_url)
+        # 이미지 파일 확인
+        file = request.FILES.get('image')  # .get()을 사용하여 파일 존재 여부 확인
+        if file:
+            filename = default_storage.save(file.name, file)
+            file_url = default_storage.url(filename)
+            print(filename, file_url)
+            img_url = file_url
 
-        img_url = file_url
-        
-
+        # 강아지 정보를 데이터베이스에 저장
         dog = Dog.objects.create(
             owner=request.user,
             name=name,
             breed=breed,
             age=age,
-
-            img_url=img_url
+            img_url=img_url  # 이미지가 없으면 None으로 저장
         )
             
-
-        return redirect('mypage:mypage_view', username=request.user.username)  # 수정 후 리다이렉트할 URL을 지정해주세요.
+        # 수정 후 리다이렉트할 URL을 지정해주세요.
+        return redirect('mypage:mypage_view', username=request.user.username)
     
-        
+    # 폼을 렌더링할 때 기존의 개 정보를 전달
     return render(request, 'mypage/add_dog_info.html', {'dog': dog})
+
 
 
 
