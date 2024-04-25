@@ -4,6 +4,8 @@ from .models import Post, Comment
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
+from django.core.files.storage import default_storage
+
 
 
 def index(request):
@@ -39,7 +41,7 @@ def postwrite(request):
     print(request.user)
     # save post
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             print(request.user)
@@ -52,6 +54,15 @@ def postwrite(request):
         'form': form
     }
     return render(request, 'community/postwrite.html', context)
+
+
+def image(request, pk):
+    file = request.FILES['image']
+    filename = default_storage.save(file.name, file)
+    file_url = default_storage.url(filename)
+    print(filename, file_url)
+    post.image = file_url
+    return render(request, 'sample/index.html')
 
 
 @login_required(login_url='accounts:login')
@@ -84,15 +95,7 @@ def delete(request, pk):
     post.delete()
     return redirect('community:board')
 
-
-# def post_like(request, pk):
-#     post = Post.objects.get(pk=pk)
-#     if request.user in post.like_users.all():
-#         post.like_users.remove(request.user)
-#     post.like_users.add(request.user, through_defaults={'memo':'메모'})
-#     return redirect('community:posting', post.pk)
-
-
+@login_required(login_url='accounts:login')
 def post_like(request, pk):
     post = Post.objects.get(pk=pk)
     if request.user in post.like_users.all():
@@ -102,6 +105,7 @@ def post_like(request, pk):
     return redirect('community:posting', post.pk)
 
 
+@login_required(login_url='accounts:login')
 def create_comment(request, pk):
     post = Post.objects.get(pk=pk)
     if request.method == 'POST':
@@ -126,7 +130,7 @@ def create_comment(request, pk):
     return render(request, 'community/post.html', context)
 
 
-
+@login_required(login_url='accounts:login')
 def update_comment(request, pk, comment_id):
     comment = Comment.objects.get(pk=comment_id)
     if comment.user.id != request.user.id:
