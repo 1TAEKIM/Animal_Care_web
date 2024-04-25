@@ -48,15 +48,40 @@ def S3ImageDownloadView(request, image_key):
 
 
 
+# def index(request):
+    
+#     if request.method == 'POST':
+#         file = request.FILES['image']
+#         filename = default_storage.save(file.name, file)
+#         file_url = default_storage.url(filename)
+#         print(filename, file_url)
+        
+#         diag = diagnosis.objects.create(image_name=filename, img_url=file_url)
+        
+#         return redirect('diagnosis:img_detail', pk=diag.pk)
+#     return render(request, 'diagnosis/index.html')
+
+
+
+
+
 def index(request):
     if request.method == 'POST':
-        file = request.FILES['image']
-        filename = default_storage.save(file.name, file)
-        file_url = default_storage.url(filename)
-        print(filename, file_url)
-        diag = diagnosis.objects.create(image_name=filename, img_url=file_url)
-        return redirect('diagnosis:img_detail', pk=diag.pk)
+        file = request.FILES.get('image')  # 파일이 없으면 None을 반환
+        if file:
+            filename = default_storage.save(file.name, file)
+            file_url = default_storage.url(filename)
+            print(filename, file_url)
+        
+            diag = diagnosis.objects.create(image_name=filename, img_url=file_url)
+            return redirect('diagnosis:img_detail', pk=diag.pk)
+        
     return render(request, 'diagnosis/index.html')
+
+
+
+
+
 
 
 def img_detail(request, pk):
