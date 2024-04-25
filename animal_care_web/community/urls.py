@@ -13,6 +13,5 @@ urlpatterns = [
     path('board/<int:post_id>/delete_comment/<int:comment_id>/', views.delete_comment, name='delete_comment'),
     path('<int:pk>/update_comment/<int:comment_id>/', views.update_comment, name='update_comment'),
     path('board/<int:pk>/like/', views.post_like, name='post_like'),
-    path('board/<int:pk>/image/', views.image, name='image')
 
 ]
