@@ -8,11 +8,11 @@ from django.shortcuts import render, get_object_or_404
 def index(request):
     # products = Products.objects.all()  # 모든 상품을 쿼리합니다.
     products = Products.objects.exclude(name='광고')
-    ad = Products.objects.filter(name = '광고')
+    ads = Products.objects.filter(detail_category__category='광고')
     user = request.user
     context = {
         'products': products,
-        'ads' : ad,
+        'ads' : ads,
         'user' : user
         
     }   # 쿼리한 상품을 컨텍스트에 담습니다.
@@ -31,17 +31,6 @@ def category_view(request, category_name):
         'ads' : ad
     }
     return render(request, 'products/category.html', context)
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -72,20 +61,21 @@ def detail(request, pk):
     return render(request, 'products/detail.html', context)
 
 
+
 @login_required
 def management(request):
-    
     if request.method == 'POST':
-        # POST 요청이 들어왔을 때
         name = request.POST.get('name')
         summary = request.POST.get('summary')
         content = request.POST.get('content')
         price = request.POST.get('price')
         
-        file = request.FILES['image']
-        filename = default_storage.save(file.name, file)
-        file_url = default_storage.url(filename)
-        img_url = file_url
+        img_url = None  # Initialize img_url as None for cases without an image
+        if 'image' in request.FILES:
+            file = request.FILES['image']
+            filename = default_storage.save(file.name, file)
+            file_url = default_storage.url(filename)
+            img_url = file_url
 
         user_grade = request.POST.get('user_grade')
 
@@ -101,16 +91,16 @@ def management(request):
         )
         product.detail_category.add(*category_ids)
         
-        return redirect('products:detail', pk=product.pk)  # 제품 상세 페이지로 리다이렉션
+        return redirect('products:detail', pk=product.pk)
     else:
-        # GET 요청이 들어왔을 때
-        categories = Categories.objects.all()
-        products = Products.objects.all()  # 모든 제품 가져오기
+        categories = Categories.objects.all()  # It's best practice to keep class names singular
+        products = Products.objects.all()
         context = {
             'categories': categories,
-            'products': products  # 모든 제품을 템플릿에 전달
+            'products': products
         }
         return render(request, 'products/management.html', context)
+
 
 
 
