@@ -13,6 +13,6 @@ class Dog(models.Model):
     name = models.CharField(max_length=100)  # 이름
     breed = models.CharField(max_length=100)  # 종
     age = models.PositiveIntegerField()  # 나이
-    image = models.ImageField(upload_to='dog_images/', default='default_image.jpg')
+    img_url = models.TextField(null=True)
 
     

@@ -93,12 +93,16 @@
     <section class="mpet-profile">
         <h2 style="text-align: center;">내 반려동물</h2>
         <!-- 반려동물 정보 추가하기 버튼 -->
+        
+        <a href="{% url "mypage:add_dog" %}">
         <button id="plus-pet-info" class="btn btn-outline-warning" style="display: block; margin: 20px auto;">반려동물 정보 추가하기</button>
+        </a>
+
         <div class="mpet-card">
             {% if dogs %}
             {% for dog in dogs %}
             <div class="mpet-info">
-                <img src="{% static 'img/pet-icon.png' %}" alt="Pet Profile">
+                <img src="{{ dog.img_url }}" alt="Pet Profile">
                 <h1>{{ dog.name }}</h1>
                 <p>종: {{ dog.breed }}</p>
                 <p>나이: {{ dog.age }}</p>
@@ -129,10 +133,10 @@
                 window.location.href = `/mypage/dog_edit/${dogId}/`;
             });
         });
-        const plusPetButton = document.getElementById('plus-pet-info');
-        plusPetButton.addEventListener('click', function() {
-            window.location.href = '/mypage/add_dog/';
-        });
+        // const plusPetButton = document.getElementById('plus-pet-info');
+        // plusPetButton.addEventListener('click', function() {
+        //    window.location.href = /mypage/add_dog/;
+        // });
     });
 </script>
 {% endblock content %}
