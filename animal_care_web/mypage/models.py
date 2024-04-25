@@ -13,8 +13,6 @@ class Dog(models.Model):
     name = models.CharField(max_length=100)  # 이름
     breed = models.CharField(max_length=100)  # 종
     age = models.PositiveIntegerField()  # 나이
-    
-    # # 필요에 따라 추가 필드를 정의할 수 있습니다.
+    # image = models.ImageField(upload_to='dog_images/', default='default_image.jpg')
 
-    # def __str__(self):
-    #     return self.name
+    

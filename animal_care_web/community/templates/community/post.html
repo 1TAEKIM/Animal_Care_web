@@ -1,102 +1,210 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>post</h1>
-    <!-- 포스트 제목 출력 -->
-    <h1>{{ post.title }}</h1>
-    <!-- 포스트 내용 출력 -->
-    <p>{{ post.content }}</p>
-    {% if post.image %}
-        <!-- 이미지가 있을 경우 이미지 출력 -->
-        <img src="{{ post.image.url }}" alt="" height="600">
-        <br>
-    {% endif %}
 
-    {% if post.user.id == request.user.id %}
-        <!-- 현재 사용자가 포스트 작성자일 경우 삭제 및 수정 버튼 표시 -->
-        <form action=delete/>
-         <input type="submit" value="삭제">
-        </form>
-        <form action=postupdate/>
-         <input type="submit" value="수정">
-        </form>
-    {% endif %}
 
-    <ul>
-        {% for comment in comments %}
-            <li>
-                <!-- 댓글 작성자, 내용, 작성일 출력 -->
-                {{ comment.user }}<br>
-                {{ comment.content }}<br>
-                {{ comment.created_at }}
-
-                <!-- 답글 작성 폼 출력 -->
-                <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
-                    {% csrf_token %}
-                    <input type="submit" value="답글">
-                </form>
-
-                <!-- 현재 사용자가 댓글 작성자일 경우 삭제 및 수정 버튼 표시 -->
-                {% if comment.user.id == request.user.id %}
-                    <form action="{% url 'community:delete_comment' post_id=post.pk comment_id=comment.pk %}" method="POST">
-                        {% csrf_token %}
-                        <input type="submit" value="삭제">
-                    </form>
-                    <form action=postupdate/>
-                        <input type="submit" value="수정">
-                    </form>
-                    <!-- 답글 작성 폼 출력 -->
-                    <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
-                        {% csrf_token %}
-                        {{ comment_form }}
-                        <input type="submit" value="답글">
+<div class="post-container">
+    <div class="post-content">
+        <div class="main-title">
+            <div class="to-board">
+                <a href="/community/board/">게시판</a>
+            </div>
+            <div class="title-content">
+                <h1>{{ post.title }}</h1>
+            </div>
+            <div class="title-footer">
+                <span>{{ post.user }}</span>
+                <i class="dot"> ・ </i>
+                <span class="se_publishDate pcol2">{{ post.created_at }}</span>
+            </div>
+        </div>
+            <hr>
+        <div class="main-content">
+            <div>
+                <span>{{ post.content }}</span>
+            </div>
+            <div>
+                {% if post.image %}
+                <img src="{{ post.image.url }}" alt="" height="600">
+                <br>
                 {% endif %}
-                <hr>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="post-footer" >
+        <div class="like-btn-container" style="float: left; margin-left: 10px;">
+            <button id="like-button" type="button" class="btn btn-outline-danger">
+                {% if request.user in post.like_users.all %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
+                    </svg>
+                {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                    </svg>
+                {% endif %}
+                {{ post.like_users.all|length }}
+            </button>
+        </div>
+        <div class="postedit-btn" style="float: right; margin-right: 10px;">
+            {% if post.user.id == request.user.id %}
+            <form action="{% url 'community:postupdate' pk=post.pk %}" method="GET" style="display: inline;">
+                <input class="btn btn-success btn-sm" type="submit" value="수정">
+            </form>
+            <form action="{% url 'community:delete' pk=post.pk %}" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-outline-success btn-sm" value="삭제">
+            </form>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+
+    <div class="post-comments">
+        <ul class="cbox-list">
+            {% for comment in comments %}
+            {% if not comment.parent %}
+            <li class="cbox-comment ">
+                <div class="cbox-comment-box">
+                    <div class="cbox-comment-area border-bottom">
+                        <div class="cbox-info">
+                            <span class="cbox-nick">{{ comment.user }}</span>
+                        </div>
+                        <div class="cbox-text-wrap">
+                            <span class="cbox-contents" data-lang="ko">{{ comment.content }}</span>
+                        </div>
+                        <div class="cbox-info-base">
+                            <span class="cbox-date" data-value="2024-04-23T15:51:47+0900">{{ comment.created_at }}</span>
+                        </div>
+                        <div class="cbox-tool">
+                            <div class="p-3 m-0 border-0 bd-example m-0 border-0">
+                                <p class="d-inline-flex gap-1">
+                                  <a class="btn btn-sm btn-warning collapsed" data-bs-toggle="collapse" href="#collapseExample{{ comment.pk }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    답글
+                                  </a>
+                                </p>
+                                <div class="collapse" id="collapseExample{{ comment.pk }}" style="">
+                                  <div class="card card-body">
+                                        <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="parent_comment_id" value="{{ comment.id }}">
+                                            {{ comment_form }}
+                                            <br>
+                                            <input type="submit" class="btn btn-light" value="등록">
+                                        </form>
+                                  </div>
+                                </div>
+                            </div>
+
+<!--                                좋아요-->
+                            <div class="cbox-likes">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="cbox-reply-area">
+                    <ul class="cbox-list">
+                        {% for child in comment.children.all %}
+                        <li class="cbox-comment">
+                            <div class="cbox-comment-box ">
+                                <div class="cbox-comment-area border-bottom">
+                                    <div class="cbox-info">
+                                        <span class="cbox-nick">{{ child.user }}</span>
+                                    </div>
+                                    <div class="cbox-text-wrap">
+                                        <span class="cbox-contents" data-lang="ko">{{ child.content }}</span>
+                                    </div>
+                                    <div class="cbox-info-base">
+                                        <span class="cbox-date" data-value="2024-04-23T15:51:47+0900">{{ child.created_at }}</span>
+                                    </div>
+                                    <div class="cbox-tool">
+<!--                                            답글-->
+                                        <a href=""></a>
+<!--                                            좋아요-->
+                                        <div class="cbox-likes">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
             </li>
-        {% endfor %}
-        <!-- 대댓글 목록 출력 -->
-        <ul>
-            {% for child in comment.children.all %}
-                <li>
-                    <!-- 대댓글 작성자, 내용, 작성일 출력 -->
-                    {{ child.user }}<br>
-                    {{ child.content }}<br>
-                    {{ child.created_at }}
-
-                    <!-- 답글 작성 폼 출력 -->
-                    <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
-                        {% csrf_token %}
-                        {{ comment_form }}
-                        <input type="submit" value="답글">
-                    </form>
-
-                    <!-- 현재 사용자가 대댓글 작성자일 경우 삭제 및 수정 버튼 표시 -->
-                    {% if child.user.id == request.user.id %}
-                        <form action="{% url 'community:delete_comment' post_id=post.pk comment_id=comment.pk %}" method="POST">
-                            {% csrf_token %}
-                            <input type="submit" value="삭제">
-                        </form>
-                        <form action=postupdate/>
-                            <input type="submit" value="수정">
-                        </form>
-                    {% endif %}
-                    <hr>
-                </li>
+            {% endif %}
             {% endfor %}
         </ul>
-    </ul>
 
-    <!-- 댓글 등록 폼 출력 -->
-    <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
-        {% csrf_token %}
-         {{ comment_form }}
-        <input type="submit" value="등록">
-    </form>
 
-    <!-- 목록으로 돌아가는 링크 출력 -->
-    <a href="/community/board/">목록</a>
 
-    <script>
-        // JavaScript 코드 추가
-    </script>
+
+        <div class="comment-box">
+            <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
+                {% csrf_token %}
+                {{ comment_form }}
+                <br>
+                <input type="submit" class="btn btn-light" value="등록">
+            </form>
+        </div>
+    </div>
+<a href="/community/board/">목록</a>
+</div>
+
+<!-- 목록으로 돌아가는 링크 출력 -->
+
+<!-- jQuery CDN 추가 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    const likeBtn = document.querySelector('#like-button');
+    const clickForm = (event) => {console.log('like click')}
+
+    likeBtn.addEventListener('click', clickForm)
+
+
+
+
+
+    $(document).ready(function() {
+        $(".errorlist").hide()
+        $(".reply-btn").click(function() {
+            $(this).closest('li').find('.cbox-btn-reply').toggle();
+        });
+        $(".edit-btn").click(function() {
+            $(this).closest('li').find('.edit-form').toggle();
+        });
+
+        $('#like-button').on('click', function() {
+            var postId = $(this).data('post-id');
+            $.ajax({
+                type: 'POST',
+                url: '/community/board/' + postId + '/like/',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function(data) {
+                    if (data.liked) {
+                        $('#like-button').attr('src', '/static/img/heart-fill.svg');
+                    } else {
+                        $('#like-button').attr('src', '/static/img/heart.svg');
+                    }
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}

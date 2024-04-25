@@ -21,10 +21,11 @@ class PostForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['content', ]
+        fields = ['content']
         labels = {
-            'content': '댓글',
+            'content': ''
         }
+
         widgets = {
             'content': forms.Textarea(attrs={'class': 'form-control', 'cols': 30, 'rows': 3}),
         }

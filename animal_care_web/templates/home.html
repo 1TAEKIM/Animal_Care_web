@@ -3,19 +3,18 @@
 {% block content %}
 
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/base.css' %}">
 
 <div class="container ">
     <div class="row flex-wrap">
         <div class="col-4">
-            <img style="width:100%" src="{% static 'img/메인 귀염둥이 강쥐.jpg' %}" alt="메인 귀염둥이 강쥐">
+            <img style="width:100%" src="{% static 'img/home/메인 귀염둥이 강쥐.jpg' %}" alt="메인 귀염둥이 강쥐">
         </div>
 
-        <div class="col-8">
+        <div class="col">
             <div class='row align-items-center' style="height:50%">
-                <div class="col">
+                <div class="col-8">
                     <div class="content">
-                        <h1>반려견 질병 진단 시스템</h1>
+                        <h1 class="Dovemayo_gothic-font">반려견 질병 진단 시스템</h1>
                         <button class="start-button">진단 시작</button>
                     </div>
                 </div>
@@ -23,28 +22,62 @@
 
             <div class="row align-items-center" style="height:50%">
                 <div class='col'>
-                    <div class="disease-info">
-                        <h4>[반려견 안구질환, 피부질환]</h4>
+                    <div class="disease-info Dovemayo_gothic-font">
+                        <h4 class="text-wrap fs-3" style="width: 17rem;">[반려견 안구질환, 피부질환 예시]</h4>
                         <div>
-                            <img src="{% static 'img/결막염1.jpg' %}" alt="결막염">
-                            <p>안구 질환 - 결막염</p>
+                            <img src="{% static 'img/home/결막염1.jpg' %}" class="rounded" alt="결막염">
+                            <p class="text-center fs-4">안구 질환 - 결막염</p>
                         </div>
                         <div>
-                            <img src="{% static 'img/안검내반증.jpg' %}" alt="안검내반증">
-                            <p>안구 질환 - 안검내반증</p>
+                            <img src="{% static 'img/home/안검내반증.jpg' %}" class="rounded" alt="안검내반증">
+                            <p class="text-center fs-4">안구 질환 - 안검내반증</p>
                         </div>
                         <div>
-                            <img src="{% static 'img/농포_여드름.jpg' %}" alt="농포_여드름">
-                            <p>피부 질환 - 농포_여드름</p>
+                            <img src="{% static 'img/home/농포_여드름.jpg' %}" class="rounded" alt="농포_여드름">
+                            <p class="text-center fs-4">피부 질환 - 농포_여드름</p>
                         </div>
                         <div>
-                            <img src="{% static 'img/비듬_각질_상피성잔고리.jpg' %}" alt="비듬_각질_상피성잔고리">
-                            <p>피부 질환 - 비듬_각질_상피성잔고리</p>
+                            <img src="{% static 'img/home/비듬_각질_상피성잔고리.jpg' %}" class="rounded" alt="비듬_각질_상피성잔고리">
+                            <p class="text-center fs-4">피부 질환 - 비듬_각질_상피성잔고리</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <footer>
+    <div class="footer Dovemayo_gothic-font fs-6">
+        <div>
+            {% comment %} <img src="{% static 'img/home/강쥐1.jpg' %}" class="rounded" alt="강쥐1">  {% endcomment %}
+            <H5>Our Mission</H5>
+            <ul class="text-start">
+                <li>반려견의 생애주기별 필요한 정보 알려주는 기능</li>
+                <li>반려인이 업로드한 사진 속 gps 정보 이용해 가까운 동물병원 추천하는 기능</li>
+                <li>지역별 반려견에게 많이 발생하는 질병 분석</li>
+                <li>챗봇 기능 생성</li>
+            </ul>
+        </div>
+        <div>
+            {% comment %} <img src="{% static 'img/home/강쥐2.jpg' %}" class="rounded" alt="강쥐2">  {% endcomment %}
+            <H5>F A Q</H5>
+            <p>언제든지 문의주세요!</p>
+            <p>010-XXXX-XXXX</p>
+            <br><br>
+        </div>
+        <div>
+            {% comment %} <img src="{% static 'img/home/두부는 단단.jpg' %}" class="rounded" alt="두부">   {% endcomment %}
+            <H5>두부는 단단</H5>
+            <H5>Team Introduction</H5>
+            <p><ul class="text-start">
+                <li>김원태: 메인 페이지, 상품 페이지, S3</li>
+                <li>박지현: 커뮤니티</li>
+                <li>백선영: 마이페이지</li>
+                <li>이강은: 회원 인증, 메인 페이지, 진단 질병 안내</li>
+                <li>홍성이: 상품 페이지, S3</li>
+            </ul></p>
+        </div>
+    </div>
+
+</footer>
 </div>
 {% endblock %}

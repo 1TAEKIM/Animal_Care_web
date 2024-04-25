@@ -26,6 +26,6 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('signup/', views.signup, name='signup'),
     path('update/', views.update, name="update"),  # 회원 아이디 수정
-    path('delete/', views.delete, name='delete'),
+    path('delete/',views.delete, name='delete'),
     path('change_password/<int:user_id>', views.change_password, name='change_password')
 ]
