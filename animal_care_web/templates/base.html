@@ -25,7 +25,7 @@
             <a href="{% url 'community:board' %}"><h3 class="fw-bolder"><li>커뮤니티</h3></a>
             {% if user.is_authenticated %}
             <a href="{% url 'mypage:mypage_view' username=user.username %}"><h3 class="fw-bolder"><li>마이페이지</h3></a>
-            <a href="{% url 'accounts:logout' %}"><h3 class="fw-bolder"><li>로그아웃</h3></a>
+            <a href="{% url 'accounts:logout' %}"><h3 class="border border-warning border-5 rounded-pill fw-bolder" style="color:#9b7817"><li>로그아웃</h3></a>
             {% else %}
             <a href="{% url 'accounts:login' %}"><h3 class="border border-warning border-5 rounded-pill fw-bolder" style="color:#9b7817"><li>로그인</h3></a>
             {% endif %}
