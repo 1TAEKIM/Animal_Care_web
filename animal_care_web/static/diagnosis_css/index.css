@@ -1,6 +1,6 @@
 /* 기본 스타일 설정 */
 html, body {
-    height: 95%; /* 전체 높이 확보 */
+    height: 100%; /* 전체 높이 확보 */
     margin: 0; /* 마진 제거 */
     font-family: 'Arial', sans-serif; /* 폰트 설정 개선 */
     background-color: #f4f4f4; /* 배경색 */
