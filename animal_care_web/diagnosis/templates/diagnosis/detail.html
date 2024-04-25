@@ -5,11 +5,10 @@
 
     <p><img src="{{ diagnosis_img.img_url }}"></p>
     <form action="{% url 'diagnosis:s3_image_download' image_key=diagnosis_img_pk %}" method="get">
-        <button type="submit">이미지 로컬에 다운로드</button> // 추 후 로컬에 저장된 이미지를 이용해서 AI 모델 결과 반환
+        <button type="submit">예측</button>
     </form>
-    
     
 {% endif %}
 
-{% endblock content %} 
+{% endblock content %}
 
