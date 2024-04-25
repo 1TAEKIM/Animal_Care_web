@@ -50,14 +50,31 @@
         flex-direction: column;
         justify-content: center;
     }
+
+
+    .mpet-info h1, .mpet-info p {
+        white-space: normal; /* 텍스트가 자동으로 줄바꿈되도록 설정 */
+        margin: 20px 20px 5px 20px; /* 위, 오른쪽, 아래, 왼쪽으로 마진 설정 */
+        color: #8B4513; /* 글자색 설정 */
+    }
+
     .mpet-info h1 {
+        font-size: 1.2rem; /* 글자 크기 설정 */
+        margin-bottom: 10px; /* h1 태그 아래쪽 마진 */
+    }
+
+    .mpet-info p {
+        margin-bottom: 5px; /* p 태그 아래쪽 마진 */
+    }
+    
+    {% comment %} .mpet-info h1 {
         font-size: 1.2rem;
         margin-bottom: 10px;
         color: #8B4513;
     }
     .mpet-info p {
         margin-bottom: 5px;
-    }
+    } {% endcomment %}
     .edit-pet-info {
         background-color: #FFFFFF;
         color: #FFD700;
@@ -68,6 +85,8 @@
         transition: background-color 0.3s ease, color 0.3s ease;
         align-self: flex-end;
         margin-top: auto;
+        margin-right: 20px; /* Add right margin */
+        margin-bottom: 20px; /* Add bottom margin */
     }
     #plus-mpet-info:hover {
         background-color: #FFA500;
