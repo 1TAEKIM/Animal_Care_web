@@ -25,7 +25,7 @@
             </div>
             <div>
                 {% if post.image %}
-                <img src="{{ post.image.url }}" alt="" height="600">
+                <img src="{{ post.image }}" alt="post_image" height="600">
                 <br>
                 {% endif %}
             </div>
@@ -160,7 +160,7 @@
             </form>
         </div>
     </div>
-<a href="/community/board/">목록</a>
+<a href="/community/board/" class="to-board">목록</a>
 </div>
 
 <!-- 목록으로 돌아가는 링크 출력 -->

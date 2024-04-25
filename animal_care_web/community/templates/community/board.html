@@ -15,9 +15,9 @@
             </thead>
             <tbody>
             {% for post in posts %}
-                <tr>
+                <tr class="to-board">
                     <td>{{ post.pk }}</td>
-                    <td><a href="{% url 'community:posting' pk=post.pk %}">{{ post.title }}</a></td>
+                    <td><a href="{% url 'community:posting' pk=post.pk %}" class="to-board">{{ post.title }}</a></td>
                     <td>{{ post.user.username }}</td> {# Assuming you have a ForeignKey to User model #}
                     <td>{{ post.created_at|date:"Y-m-d H:i:s" }}</td> {# Format the date as needed #}
                     <td>{{ post.hits }}</td>

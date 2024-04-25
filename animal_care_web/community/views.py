@@ -7,7 +7,6 @@ from django.http import JsonResponse
 from django.core.files.storage import default_storage
 
 
-
 def index(request):
     return render(request, 'community/index.html')
 
@@ -37,13 +36,25 @@ def posting(request, pk):
 
 @login_required(login_url='accounts:login')
 def postwrite(request):
-    print('user')
-    print(request.user)
+    print('writing')
     # save post
     if request.method == 'POST':
+        print('saving')
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
+            print(request.FILES)
+            file = request.FILES.get('image')  # .get()을 사용하여 파일 존재 여부 확인
+            print(file)
+            if file:
+                print('file here!!!!!')
+                filename = default_storage.save(file.name, file)
+                file_url = default_storage.url(filename)
+                print(filename, file_url)
+                img_url = file_url
+                post.image = img_url
+                print(img_url)
+                print(post.image)
             print(request.user)
             post.user = request.user
             post.save()
@@ -56,6 +67,7 @@ def postwrite(request):
     return render(request, 'community/postwrite.html', context)
 
 
+<<<<<<< HEAD
 def image(request, pk):
     file = request.FILES['image']
     filename = default_storage.save(file.name, file)
@@ -64,6 +76,8 @@ def image(request, pk):
     return render(request, 'sample/index.html')
 
 
+=======
+>>>>>>> c945b795164fc85148bd4265291dbf21ac02702e
 @login_required(login_url='accounts:login')
 def postupdate(request, pk):
     post = Post.objects.get(pk=pk)
@@ -93,6 +107,7 @@ def delete(request, pk):
         return redirect('community:posting', pk)
     post.delete()
     return redirect('community:board')
+
 
 @login_required(login_url='accounts:login')
 def post_like(request, pk):
