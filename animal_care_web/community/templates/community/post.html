@@ -7,7 +7,7 @@
     <div class="post-content">
         <div class="main-title">
             <div class="to-board">
-                <a href="/community/board/">게시판</a>
+                <a href="/community/board/" class="to-board">게시판</a>
             </div>
             <div class="title-content">
                 <h1>{{ post.title }}</h1>
@@ -35,7 +35,7 @@
 
     <div class="post-footer" >
         <div class="like-btn-container" style="float: left; margin-left: 10px;">
-            <button id="like-button" type="button" class="btn btn-outline-danger">
+            <button id="like-button" type="submit" class="btn btn-outline-danger">
                 {% if request.user in post.like_users.all %}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
@@ -151,8 +151,6 @@
         </ul>
 
 
-
-
         <div class="comment-box">
             <form action="{% url 'community:create_comment' pk=post.pk %}" method="POST">
                 {% csrf_token %}
@@ -170,40 +168,20 @@
 <!-- jQuery CDN 추가 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    const likeBtn = document.querySelector('#like-button');
-    const clickForm = (event) => {console.log('like click')}
-
-    likeBtn.addEventListener('click', clickForm)
-
-
-
-
-
-    $(document).ready(function() {
+    $(document).ready(function(){
         $(".errorlist").hide()
+
+        $('#like-button').click(function() {
+            var currentUrl = window.location.href; // 현재 URL 가져오기
+            var newUrl = currentUrl + 'like/'; // 새 URL 생성
+            location.href = newUrl; // 새 URL로 이동
+        });
+
         $(".reply-btn").click(function() {
             $(this).closest('li').find('.cbox-btn-reply').toggle();
         });
         $(".edit-btn").click(function() {
             $(this).closest('li').find('.edit-form').toggle();
-        });
-
-        $('#like-button').on('click', function() {
-            var postId = $(this).data('post-id');
-            $.ajax({
-                type: 'POST',
-                url: '/community/board/' + postId + '/like/',
-                data: {
-                    csrfmiddlewaretoken: '{{ csrf_token }}'
-                },
-                success: function(data) {
-                    if (data.liked) {
-                        $('#like-button').attr('src', '/static/img/heart-fill.svg');
-                    } else {
-                        $('#like-button').attr('src', '/static/img/heart.svg');
-                    }
-                }
-            });
         });
     });
 </script>
