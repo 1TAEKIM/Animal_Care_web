@@ -389,6 +389,8 @@ height: auto;
 display: block;
 margin: 0 auto;
 }
+
+
 /*포스트 스타일링*/
 @font-face {
     font-family: 'SDSamliphopangche_Outline';
@@ -408,7 +410,7 @@ margin: 0 auto;
 
 
 .post-container{
-    margin: 20px;
+    margin: 40px;
     font-family: "Nanum Gothic", sans-serif;
 }
 
@@ -425,6 +427,11 @@ margin: 0 auto;
     color: rgb(102, 102, 102);
     font-family: "Nanum Gothic", sans-serif;
     font-size: 16px;
+    text-decoration: none !important; /* 링크에 밑줄 제거 */
+}
+
+.to-board:hover {
+    color: blue;
 }
 
 .post-content {
@@ -536,4 +543,3 @@ margin: 0 auto;
 
 }
 
->>>>>>> 111bcec9d25fe63b3ab57da65a678a52a14913f5
