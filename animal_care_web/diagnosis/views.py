@@ -10,8 +10,8 @@ import numpy as np
 import os
 
 # # 모델 경로 설정 및 모델 로드
-# model_path = os.path.join(settings.BASE_DIR, 'fashion_mnist_model.keras')
-# model = tf.keras.models.load_model(model_path)
+model_path = os.path.join(settings.BASE_DIR, 'fashion_mnist_model.keras')
+model = tf.keras.models.load_model(model_path)
 
 def S3ImageDownloadView(request, image_key):
     try:
