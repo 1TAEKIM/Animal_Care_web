@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
 {% block content %}
 
 {% load static %}
@@ -7,32 +9,40 @@
 {% if user.user_grade == 1 %}
 <!-- 기존 텍스트 링크 대신 아이콘 링크 사용 -->
 <a href="{% url 'products:management' %}" class="">
-    <button class="btn btn-warning">상품 관리</button>
+    <button class="btn btn-warning"><h6 class = 'fw-bold'>상품 관리</button>
 </a>
 {% endif %}
 
 
-<div class="ShoppingTopArea">
-    <div class="shopSearch_inputContainer">
-        <input type="text" class="shopSearch_searchInput" placeholder="쇼핑 검색" enterkeyhint="search" value>
-        <img src="" alt=""> <!-- 검색 아이콘 -->
+<div class="header">
+    <div class="menu">
+        <!-- Insert menu items here -->
+    </div>
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="검색">
+        <button type="submit" class="search-button">
+            {% comment %} <img src="{% static 'products_css/검색.png' %}" alt="Search" /> {% endcomment %}
+        </button>
     </div>
 </div>
+
+<!-- The rest of your content -->
+
 
 
 <div class="box-container">
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'products:category' '관절건강' %}">관절 건강</a>
+            <a class="nav-link" href="{% url 'products:category' '관절건강' %}"><h5 class = 'fw-bold'>관절 건강</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'products:category' '산책' %}">산책</a>
+            <a class="nav-link" href="{% url 'products:category' '산책' %}"><h5 class = 'fw-bold'>산책</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="{% url 'products:category' '분리불안' %}">분리불안</a>
+        <a class="nav-link" href="{% url 'products:category' '분리불안' %}"><h5 class = 'fw-bold'>분리불안</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="{% url 'products:category' '알러지 관리' %}">알러지 관리</a>
+        <a class="nav-link" href="{% url 'products:category' '알러지 관리' %}"><h5 class = 'fw-bold'>알러지 관리</a>
         </li>
     </ul>
 </div>
@@ -55,7 +65,8 @@
     {% for ad_item in ads %}
     <img src="{{ ad_item.img_url }}" alt="광고">
     {% endfor %}
-</div>
+</div> 
+
 {% endblock content %}
 
 

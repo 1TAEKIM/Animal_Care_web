@@ -1,17 +1,65 @@
 {% extends "base.html" %}
-{% load static %} <!-- 스타일시트 로드를 위해 추가 -->
+{% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'diagnosis_css/diagnosis.css' %}"> <!-- 스타일시트 경로는 프로젝트에 맞게 수정 -->
+<link rel="stylesheet" href="{% static 'diagnosis_css/loading.css' %}"> <!-- diagnosis.css 파일을 연결 -->
 
 {% if diagnosis_img.img_url %}
+    <div class="centered-container">
+        <img id="diagnosis-img" src="{{ diagnosis_img.img_url }}">
+        <form id="predictForm" action="{% url 'diagnosis:s3_image_download' image_key=diagnosis_img_pk %}" method="get">
+        <button id="diagnosis-btn">진단</button>
+    </div>
 
-    <p><img src="{{ diagnosis_img.img_url }}"></p>
-    <form action="{% url 'diagnosis:s3_image_download' image_key=diagnosis_img_pk %}" method="get">
-        <button type="submit">예측</button>
-    </form>
-    
+    <div id="loading">
+        <div class="loading-content">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">진단 중...</span>
+            </div>
+            <p>진단 중...</p>
+        </div>
+    </div>
+    <div id="result">결과 표시 영역</div>
 {% endif %}
 
-{% endblock content %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var diagnosisBtn = document.getElementById('diagnosis-btn');
+    var loading = document.getElementById('loading');
+    var result = document.getElementById('result');
+    var diagnosisImg = document.getElementById('diagnosis-img');
+    var diagnosisImgPk = "{{ diagnosis_img_pk }}"; // Django 템플릿 변수
 
+    diagnosisBtn.addEventListener('click', function() {
+        diagnosisImg.style.display = 'none';
+        diagnosisBtn.style.display = 'none';
+        loading.style.display = 'block';
+
+        // 3초 후 로딩창 숨기기 및 서버 요청
+        setTimeout(function() {
+            // 서버에 예측 요청 보내기
+            fetch("{% url 'diagnosis:predict' diagnosis_img_pk %}".replace('diagnosis_img_pk', diagnosisImgPk))
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+
+            .catch(error => {
+                result.style.display = 'block';
+                result.innerHTML = 'An error occurred: ' + error;
+            })
+            .finally(() => {
+                loading.style.display = 'none';
+            });
+        }, 3000); // 로딩창을 3초간 표시
+    });
+});
+
+
+</script>
+
+    
+
+{% endblock content %}

@@ -1,0 +1,60 @@
+/* Google Fonts를 사용하여 전체적인 폰트를 개선 */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+html, body {
+    height: 100%; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+    background-color: #f4f4f4; /* 배경 색상을 더 밝은 회색으로 조정 */
+}
+
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px; /* 보더 라디우스를 약간 더 크게 조정 */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1); /* 그림자를 더 부드럽게 조정 */
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    border: 1px solid #ddd; /* 경계선 추가 */
+    animation: flipIn 0.5s ease-in-out; /* 플립 애니메이션 적용 */
+
+}
+
+h1 {
+    color: #333; /* 제목의 색상을 진한 회색으로 조정 */
+    margin-bottom: 20px; /* 여백 조정 */
+}
+
+.result {
+    margin: 20px 0;
+    color: #555; /* 결과 텍스트의 색상을 소프트한 회색으로 조정 */
+    font-size: 18px; /* 폰트 크기 조정 */
+    font-weight: 500; /* 폰트 무게 조정 */
+}
+
+.btn-success {
+    width: 100%;
+    padding: 12px; /* 버튼 패딩 조정 */
+    border-radius: 25px; /* 버튼 라운드 조정 */
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #28a745; /* 버튼 배경색 조정 */
+    color: white; /* 버튼 텍스트 색상 조정 */
+    border: none; /* 버튼 경계선 제거 */
+    cursor: pointer; /* 마우스 오버 시 커서 변경 */
+    transition: background-color 0.3s ease; /* 부드러운 배경색 변경 효과 */
+}
+
+.btn-success:hover {
+    background-color: #218838; /* 호버 시 버튼 색 변경 */
+}
+
+@keyframes flipIn {
+    0% { transform: perspective(400px) rotateY(-90deg); opacity: 0; }
+    100% { transform: perspective(400px) rotateY(0); opacity: 1; }
+}

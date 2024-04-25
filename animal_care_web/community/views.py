@@ -61,7 +61,6 @@ def image(request, pk):
     filename = default_storage.save(file.name, file)
     file_url = default_storage.url(filename)
     print(filename, file_url)
-    post.image = file_url
     return render(request, 'sample/index.html')
 
 

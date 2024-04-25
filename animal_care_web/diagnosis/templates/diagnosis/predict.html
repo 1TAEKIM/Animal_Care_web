@@ -1,18 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'diagnosis_css/result.css' %}">
+
+    <!-- If you have CSS files to include from static, do it like this:
+    <link rel="stylesheet" href="{% static 'path/to/css/file.css' %}"> 
+    -->
 </head>
 <body>
-    <h1>Prediction Result</h1>
-    {% if predicted_label %}
-        <p>Predicted Label: {{ predicted_label }}</p>
-    {% elif error %}
-        <p>Error: {{ error }}</p>
-    {% else %}
-        <p>No prediction available.</p>
-    {% endif %}
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <div class="result">
+            {% if predicted_label %}
+                <p>Predicted Label: {{ predicted_label }}</p>
+            {% elif error %}
+                <p>Error: {{ error }}</p>
+            {% else %}
+                <p>No prediction available.</p>
+            {% endif %}
+        </div>
+        <!-- Add the button inside the anchor tag -->
+        <a href="{% url 'diagnosis:index' %}">
+            <button type="button" class="btn btn-success">다시 진단하기</button>
+        </a> <!-- Make sure the URL name matches your urls.py -->
+    </div>
 </body>
 </html>
